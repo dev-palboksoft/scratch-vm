@@ -757,31 +757,31 @@ class WeDo2 {
          * If first byte of data is anything else, read incoming sensor value.
          */
         switch (data[0]) {
-        case 1:
-        case 2: {
-            const connectID = data[0];
-            if (data[1] === 0) {
-                // clear sensor or motor
-                this._clearPort(connectID);
-            } else {
-                // register sensor or motor
-                this._registerSensorOrMotor(connectID, data[3]);
+            case 1:
+            case 2: {
+                const connectID = data[0];
+                if (data[1] === 0) {
+                    // clear sensor or motor
+                    this._clearPort(connectID);
+                } else {
+                    // register sensor or motor
+                    this._registerSensorOrMotor(connectID, data[3]);
+                }
+                break;
             }
-            break;
-        }
-        default: {
-            // read incoming sensor value
-            const connectID = data[1];
-            const type = this._ports[connectID - 1];
-            if (type === WeDo2Device.DISTANCE) {
-                this._sensors.distance = data[2];
+            default: {
+                // read incoming sensor value
+                const connectID = data[1];
+                const type = this._ports[connectID - 1];
+                if (type === WeDo2Device.DISTANCE) {
+                    this._sensors.distance = data[2];
+                }
+                if (type === WeDo2Device.TILT) {
+                    this._sensors.tiltX = data[2];
+                    this._sensors.tiltY = data[3];
+                }
+                break;
             }
-            if (type === WeDo2Device.TILT) {
-                this._sensors.tiltX = data[2];
-                this._sensors.tiltY = data[3];
-            }
-            break;
-        }
         }
     }
 

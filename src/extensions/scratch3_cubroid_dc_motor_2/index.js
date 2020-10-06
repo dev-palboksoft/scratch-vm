@@ -22,7 +22,7 @@ const BLEUUID = {
     sensor_service: 'b7c23878-e520-466e-9b5b-480407ab4871',
 };
 
-class CubroidDcMotor {
+class CubroidDcMotor02 {
 
     /**
      * Construct a EduBoyt communication object.
@@ -181,20 +181,20 @@ const MotorOptions = {
 /**
  * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
  */
-class Scratch3CubroidDcMotorBlocks {
+class Scratch3CubroidDcMotor02Blocks {
 
     /**
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'CubroidDcMotor';
+        return 'CubroidDcMotor02';
     }
 
     /**
      * @return {string} - the ID of this extension.
      */
     static get EXTENSION_ID () {
-        return 'cubroiddcmotor';
+        return 'cubroiddcmotor02';
     }
 
     /**
@@ -209,7 +209,7 @@ class Scratch3CubroidDcMotorBlocks {
         this.runtime = runtime;
 
         // Create a new cubroid dc motor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
-        this._peripheral = new CubroidDcMotor(this.runtime, Scratch3CubroidDcMotorBlocks.EXTENSION_ID);
+        this._peripheral = new CubroidDcMotor02(this.runtime, Scratch3CubroidDcMotor02Blocks.EXTENSION_ID);
     }
 
     /**
@@ -217,17 +217,17 @@ class Scratch3CubroidDcMotorBlocks {
      */
     getInfo () {
         return {
-            id: Scratch3CubroidDcMotorBlocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotorBlocks.EXTENSION_NAME,
+            id: Scratch3CubroidDcMotor02Blocks.EXTENSION_ID,
+            name: Scratch3CubroidDcMotor02Blocks.EXTENSION_NAME,
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
                     opcode: 'dcMotorControl',
                     text: formatMessage({
-                        id: 'cubroiddcmotor.dcMotorControl',
-                        default: 'Motor 1 [INDEX]',
-                        description: 'Cubroid dc motor'
+                        id: 'cubroiddcmotor02.dcMotorControl',
+                        default: 'DC Motor 2 [INDEX]',
+                        description: 'Cubroid dc motor 2'
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
@@ -252,21 +252,21 @@ class Scratch3CubroidDcMotorBlocks {
         return [
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor.motoroptionmenu.stop',
+                    id: 'cubroiddcmotor02.motoroptionmenu.stop',
                     default: MotorOptions.stop.name,
                 }),
                 value: MotorOptions.stop.name
             },
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor.motoroptionmenu.left',
+                    id: 'cubroiddcmotor02.motoroptionmenu.left',
                     default: MotorOptions.left.name,
                 }),
                 value: MotorOptions.left.name
             },
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor.motoroptionmenu.right',
+                    id: 'cubroiddcmotor02.motoroptionmenu.right',
                     default: MotorOptions.right.name,
                 }),
                 value: MotorOptions.right.name
@@ -289,4 +289,4 @@ class Scratch3CubroidDcMotorBlocks {
     }
 }
 
-module.exports = Scratch3CubroidDcMotorBlocks;
+module.exports = Scratch3CubroidDcMotor02Blocks;

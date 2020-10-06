@@ -17,12 +17,12 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'Ditance Sensor',
-    misc_service: '499EE8BF-B20A-4DFB-8E47-A6AC0ED5BAA0',
-    sensor_service: '499EE8BF-B20A-4DFB-8E47-A6AC0ED5BAA1',
+    name: 'DC Motor',
+    misc_service: 'b7c23878-e520-466e-9b5b-480407ab4870',
+    sensor_service: 'b7c23878-e520-466e-9b5b-480407ab4871',
 };
 
-class CubroidProximity {
+class CubroidDcMotor01 {
 
     /**
      * Construct a EduBoyt communication object.
@@ -47,20 +47,26 @@ class CubroidProximity {
         this._onMessage = this._onMessage.bind(this);
     }
 
-    proximityControl (index) {
-        var command = 'near';
+    dcMotorControl (index) {
+        var command = 0x0000;
+        var data = [];
         switch (index) {
-            case ProximityOptions.near.num:
-                command = ProximityOptions.near.command;
+            case MotorOptions.left.name:
+                command = MotorOptions.left.command;
+                data = [255, 0];
                 break;
-            case ProximityOptions.far.num:
-                command = ProximityOptions.far.command;
+            case MotorOptions.right.name:
+                command = MotorOptions.right.command;
+                data = [0, 255];
+                break;
+            case MotorOptions.stop.name:
+                command = MotorOptions.stop.command;
+                data = [0,0];
                 break;
             default:
-                command = ProximityOptions.near.command;
+                command = MotorOptions.stop.command;
+                data = [0,0];
         }
-        console.log(command)
-        var data = [command];
         return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
     }
 
@@ -107,8 +113,7 @@ class CubroidProximity {
             ]
 
         }, this._onConnect, this.reset);
-
-        console.log("BLEUUID.name = ", BLEUUID.name);
+        // console.log("BLEUUID.name = ", BLEUUID.name);
     }
 
 
@@ -155,36 +160,41 @@ class CubroidProximity {
     }
 }
 
-const ProximityOptions = {
-    near: {
-        name: '가까이',
+const MotorOptions = {
+    left: {
+        name: 'Left',
         num: 1,
-        command: 'near'
+        command: 0x00ff
     },
-    far: {
-        name: '멀리',
+    right: {
+        name: 'Right',
         num: 2,
-        command: 'far'
+        command: 0xff00
+    },
+    stop: {
+        name: 'Stop',
+        num: 3,
+        command: 0x0000
     }
 }
 
 /**
  * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
  */
-class Scratch3CubroidProximityBlocks {
+class Scratch3CubroidDcMotor01Blocks {
 
     /**
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'CubroidProximity';
+        return 'CubroidDcMotor01';
     }
 
     /**
      * @return {string} - the ID of this extension.
      */
     static get EXTENSION_ID () {
-        return 'cubroidproximity';
+        return 'cubroiddcmotor01';
     }
 
     /**
@@ -199,7 +209,7 @@ class Scratch3CubroidProximityBlocks {
         this.runtime = runtime;
 
         // Create a new cubroid dc motor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
-        this._peripheral = new CubroidProximity(this.runtime, Scratch3CubroidProximityBlocks.EXTENSION_ID);
+        this._peripheral = new CubroidDcMotor01(this.runtime, Scratch3CubroidDcMotor01Blocks.EXTENSION_ID);
     }
 
     /**
@@ -207,69 +217,76 @@ class Scratch3CubroidProximityBlocks {
      */
     getInfo () {
         return {
-            id: Scratch3CubroidProximityBlocks.EXTENSION_ID,
-            name: Scratch3CubroidProximityBlocks.EXTENSION_NAME,
+            id: Scratch3CubroidDcMotor01Blocks.EXTENSION_ID,
+            name: Scratch3CubroidDcMotor01Blocks.EXTENSION_NAME,
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'proximityControl',
+                    opcode: 'dcMotorControl',
                     text: formatMessage({
-                        id: 'cubroidproximity.proximityControl',
-                        default: 'Proximity sensor [INDEX]',
-                        description: 'Cubroid proximity sensor'
+                        id: 'cubroiddcmotor01.dcMotorControl',
+                        default: 'DC Motor 1 [INDEX]',
+                        description: 'Cubroid dc motor 1'
                     }),
-                    blockType: BlockType.BOOLEAN,
+                    blockType: BlockType.COMMAND,
                     arguments: {
-                      INDEX: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 1
+                        INDEX: {
+                            type: ArgumentType.STRING,
+                            menu: 'motorAction',
+                            defaultValue: MotorOptions.stop.name
                         }
                     }
                 },
             ],
             menus: {
+                motorAction: {
+                    acceptReporters: true,
+                    items: this.MOTOR_ACTION_MENU
+                }
             }
         };
     }
 
-    get PROXIMITY_ACTION_MENU () {
+    get MOTOR_ACTION_MENU () {
         return [
             {
                 text: formatMessage({
-                    id: 'cubroidproximity.proximityname.near',
-                    default: ProximityOptions.near.name,
-                    description: '',
+                    id: 'cubroiddcmotor01.motoroptionmenu.stop',
+                    default: MotorOptions.stop.name,
                 }),
-                value: ProximityOptions.near.num
+                value: MotorOptions.stop.name
             },
             {
                 text: formatMessage({
-                    id: 'cubroidproximity.proximityname.far',
-                    default: ProximityOptions.far.name,
-                    description: '',
+                    id: 'cubroiddcmotor01.motoroptionmenu.left',
+                    default: MotorOptions.left.name,
                 }),
-                value: ProximityOptions.far.num
+                value: MotorOptions.left.name
+            },
+            {
+                text: formatMessage({
+                    id: 'cubroiddcmotor01.motoroptionmenu.right',
+                    default: MotorOptions.right.name,
+                }),
+                value: MotorOptions.right.name
             }
         ]
     }
 
-    proximityControl (args) {
-        const index = parseInt(args.INDEX);
+    dcMotorControl (args) {
+        const index = args.INDEX;
 
         //if (index >= 0 && index <= 3) {
-        this._peripheral.proximityControl(index);
+        this._peripheral.dcMotorControl(index);
         //}
 
-        return true;
-        /*
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
             }, 50);
         });
-        */
     }
 }
 
-module.exports = Scratch3CubroidProximityBlocks;
+module.exports = Scratch3CubroidDcMotor01Blocks;

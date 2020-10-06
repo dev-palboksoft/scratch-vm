@@ -25,6 +25,8 @@ const builtinExtensions = {
     boost: () => require('../extensions/scratch3_boost'),
     gdxfor: () => require('../extensions/scratch3_gdx_for'),
     cubroiddcmotor: () => require('../extensions/scratch3_cubroid_dc_motor'),
+    cubroiddcmotor01: () => require('../extensions/scratch3_cubroid_dc_motor_1'),
+    cubroiddcmotor02: () => require('../extensions/scratch3_cubroid_dc_motor_2'),
     cubroidproximity: () => require('../extensions/scratch3_cubroid_proximity')
 };
 

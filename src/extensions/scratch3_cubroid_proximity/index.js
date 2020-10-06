@@ -102,7 +102,7 @@ class CubroidProximity {
 
         }, this._onConnect, this.reset);
 
-        console.log("BLEUUID.name = ", BLEUUID.name);
+        // console.log("BLEUUID.name = ", BLEUUID.name);
     }
 
     connect (id) {
@@ -149,7 +149,7 @@ class CubroidProximity {
 
     _onMessage(base64) {
         const data = Base64Util.base64ToUint8Array(base64);
-        console.log("_onMessage", data[0]);
+        // console.log("_onMessage", data[0]);
         ProximityStatus.NEAR = data[0];
 
         // cancel disconnect timeout and start a new one
@@ -222,6 +222,7 @@ class Scratch3CubroidProximityBlocks {
     }
 
     proximityControl () {
+        this._peripheral.proximityControl();
         return ProximityStatus.NEAR == 1 ? true : false;
     }
 }

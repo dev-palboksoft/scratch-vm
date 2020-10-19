@@ -48,23 +48,18 @@ class CubroidDcMotor01 {
     }
 
     dcMotorControl (index) {
-        var command = 0x0000;
         var data = [];
         switch (index) {
-            case MotorOptions.left.name:
-                command = MotorOptions.left.command;
+            case MotorOptions.LEFT:
                 data = [255, 0];
                 break;
-            case MotorOptions.right.name:
-                command = MotorOptions.right.command;
+            case MotorOptions.RIGHT:
                 data = [0, 255];
                 break;
-            case MotorOptions.stop.name:
-                command = MotorOptions.stop.command;
+            case MotorOptions.STOP:
                 data = [0,0];
                 break;
             default:
-                command = MotorOptions.stop.command;
                 data = [0,0];
         }
         return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
@@ -138,8 +133,6 @@ class CubroidDcMotor01 {
         return connected;
     }
 
-
-    // 여기를 채우면 바로 끊김
     _onConnect() {
 //        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
 //        this._timeoutID = window.setInterval(
@@ -149,33 +142,26 @@ class CubroidDcMotor01 {
     }
 
     _onMessage(base64) {
-        const data = Base64Util.base64ToUint8Array(base64);
+//        const data = Base64Util.base64ToUint8Array(base64);
 
-        // cancel disconnect timeout and start a new one
-        window.clearInterval(this._timeoutID);
-        this._timeoutID = window.setInterval(
-            () => this._ble.handleDisconnectError(BLEDataStoppedError),
-            BLETimeout
-        );
+//        // cancel disconnect timeout and start a new one
+//        window.clearInterval(this._timeoutID);
+//        this._timeoutID = window.setInterval(
+//            () => this._ble.handleDisconnectError(BLEDataStoppedError),
+//            BLETimeout
+//        );
     }
 }
 
+/**
+ * motor options.
+ * @readonly
+ * @enum {string}
+ */
 const MotorOptions = {
-    left: {
-        name: 'Left',
-        num: 1,
-        command: 0x00ff
-    },
-    right: {
-        name: 'Right',
-        num: 2,
-        command: 0xff00
-    },
-    stop: {
-        name: 'Stop',
-        num: 3,
-        command: 0x0000
-    }
+    LEFT: 'Left',
+    RIGHT: 'Right',
+    STOP: 'Stop'
 }
 
 /**
@@ -187,7 +173,7 @@ class Scratch3CubroidDcMotor01Blocks {
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'CubroidDcMotor01';
+        return 'Cubroid Dc Motor 1';
     }
 
     /**
@@ -233,17 +219,14 @@ class Scratch3CubroidDcMotor01Blocks {
                     arguments: {
                         INDEX: {
                             type: ArgumentType.STRING,
-                            menu: 'motorAction',
-                            defaultValue: MotorOptions.stop.name
+                            menu: 'MotorAction',
+                            defaultValue: 'Stop'
                         }
                     }
                 },
             ],
             menus: {
-                motorAction: {
-                    acceptReporters: true,
-                    items: this.MOTOR_ACTION_MENU
-                }
+                MotorAction: this.MOTOR_ACTION_MENU
             }
         };
     }
@@ -253,23 +236,26 @@ class Scratch3CubroidDcMotor01Blocks {
             {
                 text: formatMessage({
                     id: 'cubroiddcmotor01.motoroptionmenu.stop',
-                    default: MotorOptions.stop.name,
+                    default: 'Stop',
+                    description: 'Stop'
                 }),
-                value: MotorOptions.stop.name
+                value: MotorOptions.STOP
             },
             {
                 text: formatMessage({
                     id: 'cubroiddcmotor01.motoroptionmenu.left',
-                    default: MotorOptions.left.name,
+                    default: 'Left',
+                    description: 'Left'
                 }),
-                value: MotorOptions.left.name
+                value: MotorOptions.LEFT
             },
             {
                 text: formatMessage({
                     id: 'cubroiddcmotor01.motoroptionmenu.right',
-                    default: MotorOptions.right.name,
+                    default: 'Right',
+                    description: 'Right'
                 }),
-                value: MotorOptions.right.name
+                value: MotorOptions.RIGHT
             }
         ]
     }

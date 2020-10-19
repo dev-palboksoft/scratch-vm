@@ -24,10 +24,12 @@ const builtinExtensions = {
     makeymakey: () => require('../extensions/scratch3_makeymakey'),
     boost: () => require('../extensions/scratch3_boost'),
     gdxfor: () => require('../extensions/scratch3_gdx_for'),
-    cubroiddcmotor: () => require('../extensions/scratch3_cubroid_dc_motor'),
     cubroiddcmotor01: () => require('../extensions/scratch3_cubroid_dc_motor_1'),
     cubroiddcmotor02: () => require('../extensions/scratch3_cubroid_dc_motor_2'),
-    cubroidproximity: () => require('../extensions/scratch3_cubroid_proximity')
+    cubroidproximity: () => require('../extensions/scratch3_cubroid_proximity'),
+    cubroidsound: () => require('../extensions/scratch3_cubroid_sound'),
+    cubroidlighttouch: () => require('../extensions/scratch3_cubroid_lighttouch'),
+    tm2scratch: () => require('../extensions/scratch3_tm2scratch')
 };
 
 /**

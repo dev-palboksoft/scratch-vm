@@ -15,15 +15,17 @@ const blockIconURI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYA
 const BLETimeout = 2500;
 const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
-
 const BLEUUID = {
-    name: 'DC Motor',
-    misc_service: 'b7c23878-e520-466e-9b5b-480407ab4870',
-    sensor_service: 'b7c23878-e520-466e-9b5b-480407ab4871',
+    name: 'BnL Sensor.touch',
+    misc_service: '9F41D229-FB5A-4F9D-9CED-D91154C22220',
+    sensor_service: '9F41D229-FB5A-4F9D-9CED-D91154C22221',
 };
 
-class CubroidDcMotor02 {
+const LightTouchStatus = {
+    PRESS: false
+};
 
+class CubroidLightTouch {
     /**
      * Construct a EduBoyt communication object.
      * @param {Runtime} runtime - the Scratch 3.0 runtime
@@ -40,29 +42,13 @@ class CubroidDcMotor02 {
         this._busy = false;
         this._busyTimeoutID = null;
 
-
-
         this.disconnect = this.disconnect.bind(this);
         this._onConnect = this._onConnect.bind(this);
         this._onMessage = this._onMessage.bind(this);
     }
 
-    dcMotorControl (index) {
-        var data = [];
-        switch (index) {
-            case MotorOptions.LEFT:
-                data = [255, 0];
-                break;
-            case MotorOptions.RIGHT:
-                data = [0, 255];
-                break;
-            case MotorOptions.STOP:
-                data = [0,0];
-                break;
-            default:
-                data = [0,0];
-        }
-        return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
+    lightTouchControl () {
+        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
     }
 
     send (service, characteristic, value) {
@@ -108,9 +94,9 @@ class CubroidDcMotor02 {
             ]
 
         }, this._onConnect, this.reset);
+
         // console.log("BLEUUID.name = ", BLEUUID.name);
     }
-
 
     connect (id) {
         if (this._ble) {
@@ -133,58 +119,60 @@ class CubroidDcMotor02 {
         return connected;
     }
 
+    _readLightTouchSensor () {
+        this._ble.read(
+            BLEUUID.misc_service,
+            BLEUUID.sensor_service,
+            false
+        );
+    }
+
     _onConnect() {
-//        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
-//        this._timeoutID = window.setInterval(
-//            () => this._ble.handleDisconnectError(BLEDataStoppedError),
-//            BLETimeout
-//        );
+        //this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+        //this._timeoutID = window.setInterval(
+        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
+        //    BLETimeout
+        //);
+
+        //this._batteryLevelIntervalId = window.setInterval(() => {
+        //    this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+        //}, 1000);
     }
 
     _onMessage(base64) {
-//        const data = Base64Util.base64ToUint8Array(base64);
+        const data = Base64Util.base64ToUint8Array(base64);
+        // console.log("_onMessage", data[0]);
+        LightTouchStatus.PRESS = data[0];
 
-//        // cancel disconnect timeout and start a new one
-//        window.clearInterval(this._timeoutID);
-//        this._timeoutID = window.setInterval(
-//            () => this._ble.handleDisconnectError(BLEDataStoppedError),
-//            BLETimeout
-//        );
+        // cancel disconnect timeout and start a new one
+        //window.clearInterval(this._timeoutID);
+        //this._timeoutID = window.setInterval(
+        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
+        //    BLETimeout
+        //);
     }
 }
 
 /**
- * motor options.
- * @readonly
- * @enum {string}
+ * Scratch 3.0 blocks to interact with a cubroid lightTouch sensor peripheral.
  */
-const MotorOptions = {
-    LEFT: 'Left',
-    RIGHT: 'Right',
-    STOP: 'Stop'
-}
-
-/**
- * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
- */
-class Scratch3CubroidDcMotor02Blocks {
-
+class Scratch3CubroidLightTouchBlocks {
     /**
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Cubroid Dc Motor 2';
+        return 'CubroidLightTouch';
     }
 
     /**
      * @return {string} - the ID of this extension.
      */
     static get EXTENSION_ID () {
-        return 'cubroiddcmotor02';
+        return 'cubroidlighttouch';
     }
 
     /**
-     * Construct a set of cubroid dc motor blocks.
+     * Construct a set of cubroid lightTouch sensor blocks.
      * @param {Runtime} runtime - the Scratch 3.0 runtime.
      */
     constructor (runtime) {
@@ -194,8 +182,8 @@ class Scratch3CubroidDcMotor02Blocks {
          */
         this.runtime = runtime;
 
-        // Create a new cubroid dc motor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
-        this._peripheral = new CubroidDcMotor02(this.runtime, Scratch3CubroidDcMotor02Blocks.EXTENSION_ID);
+        // Create a new cubroid lightTouch sensor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
+        this._peripheral = new CubroidLightTouch(this.runtime, Scratch3CubroidLightTouchBlocks.EXTENSION_ID);
     }
 
     /**
@@ -203,76 +191,30 @@ class Scratch3CubroidDcMotor02Blocks {
      */
     getInfo () {
         return {
-            id: Scratch3CubroidDcMotor02Blocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotor02Blocks.EXTENSION_NAME,
+            id: Scratch3CubroidLightTouchBlocks.EXTENSION_ID,
+            name: Scratch3CubroidLightTouchBlocks.EXTENSION_NAME,
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'dcMotorControl',
+                    opcode: 'lightTouchControl',
                     text: formatMessage({
-                        id: 'cubroiddcmotor02.dcMotorControl',
-                        default: 'DC Motor 2 [INDEX]',
-                        description: 'Cubroid dc motor 2'
+                        id: 'cubroidlighttouch.lightTouchControl',
+                        default: 'Light Touch sensor',
+                        description: 'Cubroid light touch sensor'
                     }),
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                        INDEX: {
-                            type: ArgumentType.STRING,
-                            menu: 'MotorAction',
-                            defaultValue: 'Stop'
-                        }
-                    }
+                    blockType: BlockType.BOOLEAN,
                 },
             ],
             menus: {
-                MotorAction: this.MOTOR_ACTION_MENU
             }
         };
     }
 
-    get MOTOR_ACTION_MENU () {
-        return [
-            {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.stop',
-                    default: 'Stop',
-                    description: 'Stop'
-                }),
-                value: MotorOptions.STOP
-            },
-            {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.left',
-                    default: 'Left',
-                    description: 'Left'
-                }),
-                value: MotorOptions.LEFT
-            },
-            {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.right',
-                    default: 'Right',
-                    description: 'Right'
-                }),
-                value: MotorOptions.RIGHT
-            }
-        ]
-    }
-
-    dcMotorControl (args) {
-        const index = args.INDEX;
-
-        //if (index >= 0 && index <= 3) {
-        this._peripheral.dcMotorControl(index);
-        //}
-
-        return new Promise(resolve => {
-            setTimeout(() => {
-                resolve();
-            }, 50);
-        });
+    lightTouchControl () {
+        this._peripheral.lightTouchControl();
+        return LightTouchStatus.PRESS == 1 ? true : false;
     }
 }
 
-module.exports = Scratch3CubroidDcMotor02Blocks;
+module.exports = Scratch3CubroidLightTouchBlocks;

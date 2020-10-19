@@ -24,8 +24,8 @@ const BLEUUID = {
 */
 const BLEUUID = {
     name: 'Ditance Sensor',
-    misc_service: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
-    sensor_service: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa1',
+    serviceStrings: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
+    characteristic: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa1',
 };
 
 const ProximityStatus = {
@@ -55,7 +55,7 @@ class CubroidProximity {
     }
 
     proximityControl () {
-        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+        this._ble.read(BLEUUID.serviceStrings, BLEUUID.characteristic, false, this._onMessage);
     }
 
     send (service, characteristic, value) {
@@ -82,7 +82,7 @@ class CubroidProximity {
 //        }
 //        this._ble = new BLE(this._runtime, this._extensionId, {
 //            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.misc_service, BLEUUID.sensor_service]}
+//                {services: [BLEUUID.motor_service, BLEUUID.serviceStrings, BLEUUID.characteristic]}
 //            ]
 //        }, this._onConnect, this.disconnect);
 //    }
@@ -97,7 +97,7 @@ class CubroidProximity {
                 { name: BLEUUID.name }
             ],
             optionalServices: [
-                BLEUUID.misc_service
+                BLEUUID.serviceStrings
             ]
 
         }, this._onConnect, this.reset);
@@ -126,38 +126,18 @@ class CubroidProximity {
         return connected;
     }
 
-    _readProximitySensor () {
-        this._ble.read(
-            BLEUUID.misc_service,
-            BLEUUID.sensor_service,
-            false
-        );
-    }
-
-    // 여기를 채우면 바로 끊김
     _onConnect() {
-        //this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
-        //this._timeoutID = window.setInterval(
-        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
-        //    BLETimeout
-        //);
-
         //this._batteryLevelIntervalId = window.setInterval(() => {
-        //    this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+        //    this._ble.read(BLEUUID.serviceStrings, BLEUUID.characteristic, true, this._onMessage);
         //}, 1000);
+
     }
 
     _onMessage(base64) {
-        const data = Base64Util.base64ToUint8Array(base64);
+        //const data = Base64Util.base64ToUint8Array(base64);
+        //alert(data)
         // console.log("_onMessage", data[0]);
-        ProximityStatus.NEAR = data[0];
-
-        // cancel disconnect timeout and start a new one
-        //window.clearInterval(this._timeoutID);
-        //this._timeoutID = window.setInterval(
-        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
-        //    BLETimeout
-        //);
+        ProximityStatus.NEAR = base64;
     }
 }
 
@@ -223,7 +203,7 @@ class Scratch3CubroidProximityBlocks {
 
     proximityControl () {
         this._peripheral.proximityControl();
-        return ProximityStatus.NEAR == 1 ? true : false;
+        return ProximityStatus.NEAR === 'AQ==' ? true : false;
     }
 }
 

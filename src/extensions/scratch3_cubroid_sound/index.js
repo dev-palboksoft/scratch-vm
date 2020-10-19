@@ -17,12 +17,12 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'DC Motor',
-    misc_service: 'b7c23878-e520-466e-9b5b-480407ab4870',
-    sensor_service: 'b7c23878-e520-466e-9b5b-480407ab4871',
+    name: 'Piezo Buzzer',
+    misc_service: '17009349-c39a-4be1-917b-aed613614910',
+    sensor_service: '17009349-c39a-4be1-917b-aed613614911',
 };
 
-class CubroidDcMotor02 {
+class CubroidSound {
 
     /**
      * Construct a EduBoyt communication object.
@@ -47,20 +47,20 @@ class CubroidDcMotor02 {
         this._onMessage = this._onMessage.bind(this);
     }
 
-    dcMotorControl (index) {
+    soundControl (index) {
         var data = [];
         switch (index) {
-            case MotorOptions.LEFT:
-                data = [255, 0];
+            case SoundOptions.DO:
+                data = [0x1b];
                 break;
-            case MotorOptions.RIGHT:
-                data = [0, 255];
+            case SoundOptions.RE:
+                data = [0x19];
                 break;
-            case MotorOptions.STOP:
-                data = [0,0];
+            case SoundOptions.MI:
+                data = [0x17];
                 break;
             default:
-                data = [0,0];
+                data = [0x1b];
         }
         return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
     }
@@ -82,17 +82,6 @@ class CubroidDcMotor02 {
             }
         );
     }
-
-//    scan () {
-//        if (this._ble) {
-//            this._ble.disconnect();
-//        }
-//        this._ble = new BLE(this._runtime, this._extensionId, {
-//            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.misc_service, BLEUUID.sensor_service]}
-//            ]
-//        }, this._onConnect, this.disconnect);
-//    }
 
     scan() {
         if (this._ble) {
@@ -133,54 +122,39 @@ class CubroidDcMotor02 {
         return connected;
     }
 
+
     _onConnect() {
-//        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
-//        this._timeoutID = window.setInterval(
-//            () => this._ble.handleDisconnectError(BLEDataStoppedError),
-//            BLETimeout
-//        );
+
     }
 
     _onMessage(base64) {
-//        const data = Base64Util.base64ToUint8Array(base64);
-
-//        // cancel disconnect timeout and start a new one
-//        window.clearInterval(this._timeoutID);
-//        this._timeoutID = window.setInterval(
-//            () => this._ble.handleDisconnectError(BLEDataStoppedError),
-//            BLETimeout
-//        );
+        const data = Base64Util.base64ToUint8Array(base64);
     }
 }
 
-/**
- * motor options.
- * @readonly
- * @enum {string}
- */
-const MotorOptions = {
-    LEFT: 'Left',
-    RIGHT: 'Right',
-    STOP: 'Stop'
+const SoundOptions = {
+    DO: 'do',
+    RE: 're',
+    MI: 'mi'
 }
 
 /**
  * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
  */
-class Scratch3CubroidDcMotor02Blocks {
+class Scratch3CubroidSoundBlocks {
 
     /**
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Cubroid Dc Motor 2';
+        return 'CubroidSound';
     }
 
     /**
      * @return {string} - the ID of this extension.
      */
     static get EXTENSION_ID () {
-        return 'cubroiddcmotor02';
+        return 'cubroidsound';
     }
 
     /**
@@ -195,7 +169,7 @@ class Scratch3CubroidDcMotor02Blocks {
         this.runtime = runtime;
 
         // Create a new cubroid dc motor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
-        this._peripheral = new CubroidDcMotor02(this.runtime, Scratch3CubroidDcMotor02Blocks.EXTENSION_ID);
+        this._peripheral = new CubroidSound(this.runtime, Scratch3CubroidSoundBlocks.EXTENSION_ID);
     }
 
     /**
@@ -203,68 +177,55 @@ class Scratch3CubroidDcMotor02Blocks {
      */
     getInfo () {
         return {
-            id: Scratch3CubroidDcMotor02Blocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotor02Blocks.EXTENSION_NAME,
+            id: Scratch3CubroidSoundBlocks.EXTENSION_ID,
+            name: Scratch3CubroidSoundBlocks.EXTENSION_NAME,
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'dcMotorControl',
-                    text: formatMessage({
-                        id: 'cubroiddcmotor02.dcMotorControl',
-                        default: 'DC Motor 2 [INDEX]',
-                        description: 'Cubroid dc motor 2'
-                    }),
+                    opcode: 'soundControl',
+                    text: 'Sound [INDEX]',
                     blockType: BlockType.COMMAND,
                     arguments: {
                         INDEX: {
                             type: ArgumentType.STRING,
-                            menu: 'MotorAction',
-                            defaultValue: 'Stop'
+                            menu: 'soundAction',
+                            defaultValue: SoundOptions.DO
                         }
                     }
                 },
             ],
             menus: {
-                MotorAction: this.MOTOR_ACTION_MENU
+                soundAction: {
+                    acceptReporters: true,
+                    items: this.SOUND_ACTION_MENU
+                }
             }
         };
     }
 
-    get MOTOR_ACTION_MENU () {
+    get SOUND_ACTION_MENU () {
         return [
             {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.stop',
-                    default: 'Stop',
-                    description: 'Stop'
-                }),
-                value: MotorOptions.STOP
+                text: 'do',
+                value: SoundOptions.DO
             },
             {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.left',
-                    default: 'Left',
-                    description: 'Left'
-                }),
-                value: MotorOptions.LEFT
+                text: 're',
+                value: SoundOptions.RE
             },
             {
-                text: formatMessage({
-                    id: 'cubroiddcmotor02.motoroptionmenu.right',
-                    default: 'Right',
-                    description: 'Right'
-                }),
-                value: MotorOptions.RIGHT
+                text: 'mi',
+                value: SoundOptions.MI
             }
         ]
     }
 
-    dcMotorControl (args) {
+    soundControl (args) {
         const index = args.INDEX;
 
         //if (index >= 0 && index <= 3) {
-        this._peripheral.dcMotorControl(index);
+        this._peripheral.soundControl(index);
         //}
 
         return new Promise(resolve => {
@@ -275,4 +236,4 @@ class Scratch3CubroidDcMotor02Blocks {
     }
 }
 
-module.exports = Scratch3CubroidDcMotor02Blocks;
+module.exports = Scratch3CubroidSoundBlocks;

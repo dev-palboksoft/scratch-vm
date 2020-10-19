@@ -62,6 +62,17 @@ class JSONRPC {
         if (json.jsonrpc !== '2.0') {
             throw new Error(`Bad or missing JSON-RPC version in message: ${json}`);
         }
+        var encoding = null;
+        var message = null;
+        try {
+            encoding = json.result.encoding;
+            message = json.result.message;
+        } catch (e) {}
+        if (encoding && message) {
+            delete json.id;
+            json.method = 'characteristicDidChange';
+            json.params = {'encoding': encoding, 'message': message};
+        }
         if (json.hasOwnProperty('method')) {
             this._handleRequest(json);
         } else {

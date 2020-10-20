@@ -17,7 +17,7 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'Piezo Buzzer',
+    name: 'Piezo Buzzer-0001',
     misc_service: '17009349-c39a-4be1-917b-aed613614910',
     sensor_service: '17009349-c39a-4be1-917b-aed613614911',
 };

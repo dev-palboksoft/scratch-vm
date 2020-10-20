@@ -1,12 +1,10 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
-const Cast = require('../../util/cast');
 const log = require('../../util/log');
 const cast = require('../../util/cast');
 const formatMessage = require('format-message');
 const BLE = require('../../io/ble');
 const Base64Util = require('../../util/base64-util');
-const MathUtil = require('../../util/math-util');
 
 /**
  * Icon png to be displayed at the left edge of each extension block, encoded as a data URI.
@@ -19,12 +17,12 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'DC Motor',
-    misc_service: 'b7c23878-e520-466e-9b5b-480407ab4870',
-    sensor_service: 'b7c23878-e520-466e-9b5b-480407ab4871',
+    name: 'DOT MATRIX-0001',
+    service_strings: '268d6478-81c1-4add-837f-2aaab0f860b0',
+    characteristic: '268d6478-81c1-4add-837f-2aaab0f860b1',
 };
 
-class CubroidDcMotor01 {
+class CubroidLED {
 
     /**
      * Construct a EduBoyt communication object.
@@ -64,7 +62,7 @@ class CubroidDcMotor01 {
             default:
                 data = [0,0];
         }
-        return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
+        return this.send(BLEUUID.service_strings, BLEUUID.characteristic, data);
     }
 
     send (service, characteristic, value) {
@@ -91,7 +89,7 @@ class CubroidDcMotor01 {
 //        }
 //        this._ble = new BLE(this._runtime, this._extensionId, {
 //            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.misc_service, BLEUUID.sensor_service]}
+//                {services: [BLEUUID.motor_service, BLEUUID.service_strings, BLEUUID.characteristic]}
 //            ]
 //        }, this._onConnect, this.disconnect);
 //    }
@@ -106,7 +104,7 @@ class CubroidDcMotor01 {
                 { name: BLEUUID.name }
             ],
             optionalServices: [
-                BLEUUID.misc_service
+                BLEUUID.service_strings
             ]
 
         }, this._onConnect, this.reset);
@@ -136,7 +134,7 @@ class CubroidDcMotor01 {
     }
 
     _onConnect() {
-//        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+//        this._ble.read(BLEUUID.service_strings, BLEUUID.characteristic, true, this._onMessage);
 //        this._timeoutID = window.setInterval(
 //            () => this._ble.handleDisconnectError(BLEDataStoppedError),
 //            BLETimeout
@@ -169,20 +167,20 @@ const MotorOptions = {
 /**
  * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
  */
-class Scratch3CubroidDcMotor01Blocks {
+class Scratch3CubroidLEDBlocks {
 
     /**
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Cubroid Dc Motor 1';
+        return 'Cubroid Dot Matrix';
     }
 
     /**
      * @return {string} - the ID of this extension.
      */
     static get EXTENSION_ID () {
-        return 'cubroiddcmotor01';
+        return 'cubroidled';
     }
 
     /**
@@ -197,7 +195,7 @@ class Scratch3CubroidDcMotor01Blocks {
         this.runtime = runtime;
 
         // Create a new cubroid dc motor peripheral instance (아래는 큐브로이드를 연결하기 전에 찾는 화면이 보여주는 코드)
-        this._peripheral = new CubroidDcMotor01(this.runtime, Scratch3CubroidDcMotor01Blocks.EXTENSION_ID);
+        this._peripheral = new CubroidLED(this.runtime, Scratch3CubroidLEDBlocks.EXTENSION_ID);
     }
 
     /**
@@ -205,50 +203,26 @@ class Scratch3CubroidDcMotor01Blocks {
      */
     getInfo () {
         return {
-            id: Scratch3CubroidDcMotor01Blocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotor01Blocks.EXTENSION_NAME,
+            id: Scratch3CubroidLEDBlocks.EXTENSION_ID,
+            name: Scratch3CubroidLEDBlocks.EXTENSION_NAME,
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
                     opcode: 'dcMotorControl',
                     text: formatMessage({
-                        id: 'cubroiddcmotor01.dcMotorControl',
-                        default: 'DC Motor 1 [INDEX]',
-                        description: 'Cubroid dc motor 1'
+                        id: 'cubroidled.dcMotorControl',
+                        default: 'LED [MATRIX]',
+                        description: 'LED'
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
-                        INDEX: {
-                            type: ArgumentType.STRING,
-                            menu: 'MotorAction',
-                            defaultValue: 'Stop'
+                        MATRIX: {
+                            type: ArgumentType.MATRIX,
+                            defaultValue: '0101010101100010101000100'
                         }
                     }
                 },
-                {
-                    opcode: 'dcMotorControl2',
-                    text: 'DC 모터 1번을 [TIME]초 동안 [INDEX]',
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                        TIME: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 1
-                        },
-                        INDEX: {
-                            type: ArgumentType.STRING,
-                            menu: 'MotorAction',
-                            defaultValue: 'Stop'
-                        }
-                    }
-                },
-                {
-                    opcode: 'dcMotorStop',
-                    text: 'DC 모터 1번을 끄기',
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                    }
-                }
             ],
             menus: {
                 MotorAction: this.MOTOR_ACTION_MENU
@@ -260,7 +234,7 @@ class Scratch3CubroidDcMotor01Blocks {
         return [
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor01.motoroptionmenu.stop',
+                    id: 'cubroidled.motoroptionmenu.stop',
                     default: 'Stop',
                     description: 'Stop'
                 }),
@@ -268,7 +242,7 @@ class Scratch3CubroidDcMotor01Blocks {
             },
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor01.motoroptionmenu.left',
+                    id: 'cubroidled.motoroptionmenu.left',
                     default: 'Left',
                     description: 'Left'
                 }),
@@ -276,7 +250,7 @@ class Scratch3CubroidDcMotor01Blocks {
             },
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor01.motoroptionmenu.right',
+                    id: 'cubroidled.motoroptionmenu.right',
                     default: 'Right',
                     description: 'Right'
                 }),
@@ -298,26 +272,6 @@ class Scratch3CubroidDcMotor01Blocks {
             }, 50);
         });
     }
-
-    dcMotorControl2 (args) {
-        const index = args.INDEX;
-
-        let time = Cast.toNumber(args.TIME) * 1000;
-        time = MathUtil.clamp(time, 0, 360000);
-
-        return new Promise(resolve => {
-            this._peripheral.dcMotorControl(index);
-            setTimeout(() => {
-                this._peripheral.dcMotorControl(MotorOptions.STOP);
-            }, time);
-            // Run for some time even when no motor is connected
-            setTimeout(resolve, time + 500);
-        });
-    }
-
-    dcMotorStop () {
-        this._peripheral.dcMotorControl(MotorOptions.STOP);
-    }
 }
 
-module.exports = Scratch3CubroidDcMotor01Blocks;
+module.exports = Scratch3CubroidLEDBlocks;

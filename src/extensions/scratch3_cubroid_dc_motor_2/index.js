@@ -1,10 +1,12 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
+const Cast = require('../../util/cast');
 const log = require('../../util/log');
 const cast = require('../../util/cast');
 const formatMessage = require('format-message');
 const BLE = require('../../io/ble');
 const Base64Util = require('../../util/base64-util');
+const MathUtil = require('../../util/math-util');
 
 /**
  * Icon png to be displayed at the left edge of each extension block, encoded as a data URI.
@@ -224,6 +226,29 @@ class Scratch3CubroidDcMotor02Blocks {
                         }
                     }
                 },
+                {
+                    opcode: 'dcMotorControl2',
+                    text: 'DC 모터 2번을 [TIME]초 동안 [INDEX]',
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        TIME: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 1
+                        },
+                        INDEX: {
+                            type: ArgumentType.STRING,
+                            menu: 'MotorAction',
+                            defaultValue: 'Stop'
+                        }
+                    }
+                },
+                {
+                    opcode: 'dcMotorStop',
+                    text: 'DC 모터 2번을 끄기',
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                    }
+                }
             ],
             menus: {
                 MotorAction: this.MOTOR_ACTION_MENU
@@ -272,6 +297,26 @@ class Scratch3CubroidDcMotor02Blocks {
                 resolve();
             }, 50);
         });
+    }
+
+    dcMotorControl2 (args) {
+        const index = args.INDEX;
+
+        let time = Cast.toNumber(args.TIME) * 1000;
+        time = MathUtil.clamp(time, 0, 360000);
+
+        return new Promise(resolve => {
+            this._peripheral.dcMotorControl(index);
+            setTimeout(() => {
+                this._peripheral.dcMotorControl(MotorOptions.STOP);
+            }, time);
+            // Run for some time even when no motor is connected
+            setTimeout(resolve, time + 500);    // STOP과 혼선을 막기위해 500 딜레이
+        });
+    }
+
+    dcMotorStop () {
+        this._peripheral.dcMotorControl(MotorOptions.STOP);
     }
 }
 

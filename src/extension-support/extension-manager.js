@@ -29,6 +29,8 @@ const builtinExtensions = {
     cubroidproximity: () => require('../extensions/scratch3_cubroid_proximity'),
     cubroidsound: () => require('../extensions/scratch3_cubroid_sound'),
     cubroidlighttouch: () => require('../extensions/scratch3_cubroid_lighttouch'),
+    cubroidled: () => require('../extensions/scratch3_cubroid_led'),
+    cubroidmaster: () => require('../extensions/scratch3_cubroid_master'),
     tm2scratch: () => require('../extensions/scratch3_tm2scratch')
 };
 

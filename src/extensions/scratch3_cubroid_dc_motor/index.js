@@ -88,17 +88,6 @@ class CubroidDcMotor {
         );
     }
 
-//    scan () {
-//        if (this._ble) {
-//            this._ble.disconnect();
-//        }
-//        this._ble = new BLE(this._runtime, this._extensionId, {
-//            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.misc_service, BLEUUID.sensor_service]}
-//            ]
-//        }, this._onConnect, this.disconnect);
-//    }
-
     scan() {
         if (this._ble) {
             this._ble.disconnect();

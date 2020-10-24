@@ -50,17 +50,32 @@ class CubroidSound {
     soundControl (index) {
         var data = [];
         switch (index) {
-            case SoundOptions.DO:
-                data = [0x1b];
+            case SoundOptions.DO.name:
+                data = [SoundOptions.DO.command];
                 break;
-            case SoundOptions.RE:
-                data = [0x19];
+            case SoundOptions.RE.name:
+                data = [SoundOptions.RE.command];
                 break;
-            case SoundOptions.MI:
-                data = [0x17];
+            case SoundOptions.MI.name:
+                data = [SoundOptions.MI.command];
+                break;
+            case SoundOptions.FA.name:
+                data = [SoundOptions.FA.command];
+                break;
+            case SoundOptions.SOL.name:
+                data = [SoundOptions.SOL.command];
+                break;
+            case SoundOptions.RA.name:
+                data = [SoundOptions.RA.command];
+                break;
+            case SoundOptions.SI.name:
+                data = [SoundOptions.SI.command];
+                break;
+            case SoundOptions.HDO.name:
+                data = [SoundOptions.HDO.command];
                 break;
             default:
-                data = [0x1b];
+                data = [SoundOptions.DO.command];
         }
         return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
     }
@@ -133,9 +148,38 @@ class CubroidSound {
 }
 
 const SoundOptions = {
-    DO: 'do',
-    RE: 're',
-    MI: 'mi'
+    DO: {
+        name: 'DO',
+        command: 0x1b
+    },
+    RE: {
+        name: 'RE',
+        command: 0x19
+    },
+    MI: {
+        name: 'MI',
+        command: 0x17
+    },
+    FA: {
+        name: 'FA',
+        command: 0x15
+    },
+    SOL: {
+        name: 'SOL',
+        command: 0x13
+    },
+    RA: {
+        name: 'RA',
+        command: 0x11
+    },
+    SI: {
+        name: 'SI',
+        command: 0x0f
+    },
+    HDO: {
+        name: 'HDO',
+        command: 0x0d
+    }
 }
 
 /**
@@ -184,13 +228,13 @@ class Scratch3CubroidSoundBlocks {
             blocks: [
                 {
                     opcode: 'soundControl',
-                    text: 'Sound [INDEX]',
+                    text: 'Sound [SOUND]',
                     blockType: BlockType.COMMAND,
                     arguments: {
-                        INDEX: {
+                        SOUND: {
                             type: ArgumentType.STRING,
                             menu: 'soundAction',
-                            defaultValue: SoundOptions.DO
+                            defaultValue: SoundOptions.DO.name
                         }
                     }
                 },
@@ -207,31 +251,49 @@ class Scratch3CubroidSoundBlocks {
     get SOUND_ACTION_MENU () {
         return [
             {
-                text: 'do',
-                value: SoundOptions.DO
+                text: '도',
+                value: SoundOptions.DO.name
             },
             {
-                text: 're',
-                value: SoundOptions.RE
+                text: '레',
+                value: SoundOptions.RE.name
             },
             {
-                text: 'mi',
-                value: SoundOptions.MI
+                text: '미',
+                value: SoundOptions.MI.name
+            },
+            {
+                text: '파',
+                value: SoundOptions.FA.name
+            },
+            {
+                text: '솔',
+                value: SoundOptions.SOL.name
+            },
+            {
+                text: '라',
+                value: SoundOptions.RA.name
+            },
+            {
+                text: '시',
+                value: SoundOptions.SI.name
+            },
+            {
+                text: '도',
+                value: SoundOptions.HDO.name
             }
         ]
     }
 
     soundControl (args) {
-        const index = args.INDEX;
+        const sound = args.SOUND;
 
-        //if (index >= 0 && index <= 3) {
-        this._peripheral.soundControl(index);
-        //}
+        this._peripheral.soundControl(sound);
 
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 50);
+            }, 100);
         });
     }
 }

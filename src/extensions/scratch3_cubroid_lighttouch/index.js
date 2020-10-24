@@ -16,14 +16,21 @@ const BLETimeout = 2500;
 const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 const BLEUUID = {
-    name: 'BnL Sensor.touch',
-    misc_service: '9F41D229-FB5A-4F9D-9CED-D91154C22220',
-    sensor_service: '9F41D229-FB5A-4F9D-9CED-D91154C22221',
+    name: 'BnL Sensor-0001',
+    service_strings_touch: '9f41d229-fb5a-4f9d-9ced-d91154c22220',
+    characteristic_touch: '9f41d229-fb5a-4f9d-9ced-d91154c22221',
+    service_strings_light: '5a1aad12-5260-49c2-80ed-4bb80a63eaa0',
+    characteristic_light: '5a1aad12-5260-49c2-80ed-4bb80a63eaa1',
 };
 
 const LightTouchStatus = {
-    PRESS: false
+    LIGHT_VALUE: 0,
+    IS_PRESS: false
 };
+const ThisSensorType = {    // 'light' or 'touch' or null
+    TYPE: null
+}
+const IntervalTime = 500;
 
 class CubroidLightTouch {
     /**
@@ -45,10 +52,28 @@ class CubroidLightTouch {
         this.disconnect = this.disconnect.bind(this);
         this._onConnect = this._onConnect.bind(this);
         this._onMessage = this._onMessage.bind(this);
+        this._onMessageForLight = this._onMessage.bind(this);
+        this._onMessageForTouch = this._onMessage.bind(this);
+
+        this.lightSensorControl = this.lightSensorControl.bind(this);
+        this.touchSensorControl = this.touchSensorControl.bind(this);
+        this.ble_read = this.ble_read.bind(this);
+        this.lightValue = this.lightValue.bind(this);
+        this._initValue = this._initValue.bind(this);
     }
 
-    lightTouchControl () {
-        this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
+    lightSensorControl () {
+        this.ble_read(BLEUUID.service_strings_light, BLEUUID.characteristic_light, this._onMessageForLight);
+    }
+
+    touchSensorControl () {
+        this.ble_read(BLEUUID.service_strings_touch, BLEUUID.characteristic_touch, this._onMessageForTouch);
+    }
+
+    ble_read (service, characteristic, callback=()=>{}) {
+        if (!this.isConnected()) return;
+        if (this._busy) return;
+        this._ble.read(service, characteristic, false, callback);
     }
 
     send (service, characteristic, value) {
@@ -69,17 +94,6 @@ class CubroidLightTouch {
         );
     }
 
-//    scan () {
-//        if (this._ble) {
-//            this._ble.disconnect();
-//        }
-//        this._ble = new BLE(this._runtime, this._extensionId, {
-//            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.misc_service, BLEUUID.sensor_service]}
-//            ]
-//        }, this._onConnect, this.disconnect);
-//    }
-
     scan() {
         if (this._ble) {
             this._ble.disconnect();
@@ -90,7 +104,8 @@ class CubroidLightTouch {
                 { name: BLEUUID.name }
             ],
             optionalServices: [
-                BLEUUID.misc_service
+                BLEUUID.service_strings_touch, 
+                BLEUUID.service_strings_light
             ]
 
         }, this._onConnect, this.reset);
@@ -106,6 +121,7 @@ class CubroidLightTouch {
 
     disconnect () {
         window.clearInterval(this._timeoutID);
+        this._initValue();
         if (this._ble) {
             this._ble.disconnect();
         }
@@ -119,37 +135,52 @@ class CubroidLightTouch {
         return connected;
     }
 
-    _readLightTouchSensor () {
-        this._ble.read(
-            BLEUUID.misc_service,
-            BLEUUID.sensor_service,
-            false
-        );
+    lightValue (uint8Array) {
+        let value = 0;
+        try {
+            value = uint8Array[0] + (uint8Array[1] * 255);
+        } catch (e) {
+            value = 0;
+        }
+        return value;
+    }
+
+    _initValue() {
+        LightTouchStatus.LIGHT_VALUE = 0;
+        LightTouchStatus.IS_PRESS = false;
     }
 
     _onConnect() {
-        //this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
-        //this._timeoutID = window.setInterval(
-        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
-        //    BLETimeout
-        //);
-
-        //this._batteryLevelIntervalId = window.setInterval(() => {
-        //    this._ble.read(BLEUUID.misc_service, BLEUUID.sensor_service, true, this._onMessage);
-        //}, 1000);
+        window.setInterval(() => {
+            this.ble_read(BLEUUID.service_strings_light, BLEUUID.characteristic_light, this._onMessageForLight);
+        }, IntervalTime);
+        window.setInterval(() => {
+            this.ble_read(BLEUUID.service_strings_touch, BLEUUID.characteristic_touch, this._onMessageForTouch);
+        }, IntervalTime);
     }
 
     _onMessage(base64) {
         const data = Base64Util.base64ToUint8Array(base64);
-        // console.log("_onMessage", data[0]);
-        LightTouchStatus.PRESS = data[0];
+        // console.log('_onMessage', data.length, data)
+        if (data.length > 1) {
+            // 빛 센서
+            LightTouchStatus.LIGHT_VALUE = this.lightValue(data);
+        } else {
+            // 버튼 
+            LightTouchStatus.IS_PRESS = data[0] === 1 ? true : false;
+        }
+    }
 
-        // cancel disconnect timeout and start a new one
-        //window.clearInterval(this._timeoutID);
-        //this._timeoutID = window.setInterval(
-        //    () => this._ble.handleDisconnectError(BLEDataStoppedError),
-        //    BLETimeout
-        //);
+    _onMessageForLight(base64) {
+        const data = Base64Util.base64ToUint8Array(base64);
+        // console.log("_onMessageForLight", data)
+        LightTouchStatus.LIGHT_VALUE = this.lightValue(data);
+    }
+
+    _onMessageForTouch(base64) {
+        const data = Base64Util.base64ToUint8Array(base64);
+        // console.log("_onMessageForTouch", data)
+        LightTouchStatus.IS_PRESS = data[0] === 1 ? true : false;
     }
 }
 
@@ -161,7 +192,7 @@ class Scratch3CubroidLightTouchBlocks {
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'CubroidLightTouch';
+        return  'Cubroid Light N Touch Block';
     }
 
     /**
@@ -188,22 +219,79 @@ class Scratch3CubroidLightTouchBlocks {
 
     /**
      * @returns {object} metadata for this extension and its blocks.
+     * formatMessage({
+                id: 'cubroidlighttouch.extensionName',
+                default: 'Light N Touch Block',
+                description: 'Light N Touch Block'
+            })
      */
     getInfo () {
         return {
             id: Scratch3CubroidLightTouchBlocks.EXTENSION_ID,
-            name: Scratch3CubroidLightTouchBlocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroidlighttouch.extensionName',
+                default: 'LightNTouch',
+                description: 'LightNTouch'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'lightTouchControl',
+                    opcode: 'whenButtonPressed',
                     text: formatMessage({
-                        id: 'cubroidlighttouch.lightTouchControl',
-                        default: 'Light Touch sensor',
-                        description: 'Cubroid light touch sensor'
+                        id: 'cubroidlighttouch.whenButtonPressed',
+                        default: 'When button Pressed',
+                        description: 'When button Pressed'
+                    }),
+                    blockType: BlockType.HAT,
+                },
+                {
+                    opcode: 'isButtonPressed',
+                    text: formatMessage({
+                        id: 'cubroidlighttouch.isButtonPressed',
+                        default: 'Is button pressed?',
+                        description: 'Is button pressed?'
                     }),
                     blockType: BlockType.BOOLEAN,
+                },
+                {
+                    opcode: 'whenBrightnessLessThan01',
+                    text: formatMessage({
+                        id: 'cubroidlighttouch.whenBrightnessLessThan01',
+                        default: 'when brightness < [DISTANCE]',
+                        description: 'when brightness < [DISTANCE]'
+                    }),
+                    blockType: BlockType.HAT,
+                    arguments: {
+                        DISTANCE: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 500
+                        }
+                    }
+                },
+                {
+                    opcode: 'whenBrightnessLessThan02',
+                    text: formatMessage({
+                        id: 'cubroidlighttouch.whenBrightnessLessThan02',
+                        default: 'when brightness > [DISTANCE]',
+                        description: 'when brightness > [DISTANCE]'
+                    }),
+                    blockType: BlockType.HAT,
+                    arguments: {
+                        DISTANCE: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 500
+                        }
+                    }
+                },
+                {
+                    opcode: 'getBrightness',
+                    text: formatMessage({
+                        id: 'cubroidlighttouch.getBrightness',
+                        default: 'brightness',
+                        description: 'brightness'
+                    }),
+                    blockType: BlockType.REPORTER
                 },
             ],
             menus: {
@@ -211,9 +299,31 @@ class Scratch3CubroidLightTouchBlocks {
         };
     }
 
-    lightTouchControl () {
-        this._peripheral.lightTouchControl();
-        return LightTouchStatus.PRESS == 1 ? true : false;
+    // 버튼이 눌러졌을 때
+    whenButtonPressed () {
+        return LightTouchStatus.IS_PRESS;
+    }
+
+    // 버튼이 눌러졌는가?
+    isButtonPressed () {
+        return LightTouchStatus.IS_PRESS;
+    }
+
+    // 밝기 < [DISTANCE] 일 때
+    whenBrightnessLessThan01 (arg) {
+        const distance = arg.DISTANCE;
+        return LightTouchStatus.LIGHT_VALUE < distance ? true : false;
+    }
+
+    // 밝기 > [DISTANCE] 일 때
+    whenBrightnessLessThan02 (arg) {
+        const distance = arg.DISTANCE;
+        return LightTouchStatus.LIGHT_VALUE > distance ? true : false;
+    }
+
+    // 빛센서 값
+    getBrightness () {
+        return LightTouchStatus.LIGHT_VALUE;
     }
 }
 

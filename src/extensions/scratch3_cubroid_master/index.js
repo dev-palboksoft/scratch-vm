@@ -183,7 +183,8 @@ class Scratch3CubroidMasterBlocks {
                     blockType: BlockType.COMMAND,
                     arguments: {
                         COLOR: {
-                            type: ArgumentType.COLOR
+                            type: ArgumentType.COLOR,
+                            defaultValue: '#ff0000'
                         }
                     },
                     filter: [TargetType.SPRITE]
@@ -203,7 +204,7 @@ class Scratch3CubroidMasterBlocks {
 
     colorControl (args, util) {
         const color = args.COLOR
-        // console.log("util", util)
+        // console.log("color", color)
         const rgb = Cast.toRgbColorObject(color);
         // console.log("rgb", rgb)
         // const hsv = Color.rgbToHsv(rgb);

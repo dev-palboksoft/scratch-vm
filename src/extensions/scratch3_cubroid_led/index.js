@@ -47,21 +47,9 @@ class CubroidLED {
         this._onMessage = this._onMessage.bind(this);
     }
 
-    dcMotorControl (index) {
-        var data = [];
-        switch (index) {
-            case MotorOptions.LEFT:
-                data = [255, 0];
-                break;
-            case MotorOptions.RIGHT:
-                data = [0, 255];
-                break;
-            case MotorOptions.STOP:
-                data = [0,0];
-                break;
-            default:
-                data = [0,0];
-        }
+    lceControl (hexString) {
+        const data = Uint8Array.from(Buffer.from(hexString, 'hex'));
+        // console.log(data)
         return this.send(BLEUUID.service_strings, BLEUUID.characteristic, data);
     }
 
@@ -209,67 +197,210 @@ class Scratch3CubroidLEDBlocks {
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'dcMotorControl',
-                    text: formatMessage({
-                        id: 'cubroidled.dcMotorControl',
-                        default: 'LED [MATRIX]',
-                        description: 'LED'
-                    }),
+                    opcode: 'lceAlpabetControl',
+                    text: '글자 [MATRIX] 보여지기',
                     blockType: BlockType.COMMAND,
                     arguments: {
                         MATRIX: {
                             type: ArgumentType.MATRIX,
-                            defaultValue: '0101010101100010101000100'
+                            menu: 'MenuAlpabet',
+                            defaultValue: '003c66667e666666'
+                        }
+                    }
+                },
+                {
+                    opcode: 'lceNumberControl',
+                    text: '숫자 [MATRIX] 보여지기',
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        MATRIX: {
+                            type: ArgumentType.MATRIX,
+                            menu: 'MenuNumber',
+                            defaultValue: '0018181c1818187e'
                         }
                     }
                 },
             ],
             menus: {
-                MotorAction: this.MOTOR_ACTION_MENU
+                MenuAlpabet: this.MENU_ALPABET, 
+                MenuNumber: this.MENU_NUMBER
             }
         };
     }
 
-    get MOTOR_ACTION_MENU () {
+    get MENU_ALPABET () {
         return [
             {
-                text: formatMessage({
-                    id: 'cubroidled.motoroptionmenu.stop',
-                    default: 'Stop',
-                    description: 'Stop'
-                }),
-                value: MotorOptions.STOP
+                text: 'A',
+                value: '003c66667e666666'
             },
             {
-                text: formatMessage({
-                    id: 'cubroidled.motoroptionmenu.left',
-                    default: 'Left',
-                    description: 'Left'
-                }),
-                value: MotorOptions.LEFT
+                text: 'B',
+                value: '003e66663e66663e'
             },
             {
-                text: formatMessage({
-                    id: 'cubroidled.motoroptionmenu.right',
-                    default: 'Right',
-                    description: 'Right'
-                }),
-                value: MotorOptions.RIGHT
-            }
+                text: 'C',
+                value: '003c66060606663c'
+            },
+            {
+                text: 'D',
+                value: '003e66666666663e'
+            },
+            {
+                text: 'E',
+                value: '007e06063e06067e'
+            },
+            {
+                text: 'F',
+                value: '007e06063e060606'
+            },
+            {
+                text: 'G',
+                value: '003c66060676663c'
+            },
+            {
+                text: 'H',
+                value: '006666667e666666'
+            },
+            {
+                text: 'I',
+                value: '003c18181818183c'
+            },
+            {
+                text: 'J',
+                value: '007830303036361c'
+            },
+            {
+                text: 'K',
+                value: '0066361e0e1e3666'
+            },
+            {
+                text: 'L',
+                value: '000606060606067e'
+            },
+            {
+                text: 'M',
+                value: '00c6eefed6c6c6c6'
+            },
+            {
+                text: 'N',
+                value: '00c6cedef6e6c6c6'
+            },
+            {
+                text: 'O',
+                value: '003c66666666663c'
+            },
+            {
+                text: 'P',
+                value: '003e6666663e0606'
+            },
+            {
+                text: 'Q',
+                value: '003c666666763c60'
+            },
+            {
+                text: 'R',
+                value: '003e66663e1e3666'
+            },
+            {
+                text: 'S',
+                value: '003c66063c60663c'
+            },
+            {
+                text: 'T',
+                value: '007e5a1818181818'
+            },
+            {
+                text: 'U',
+                value: '006666666666667c'
+            },
+            {
+                text: 'V',
+                value: '0066666666663c18'
+            },
+            {
+                text: 'W',
+                value: '00c6c6c6d6feeec6'
+            },
+            {
+                text: 'X',
+                value: '00c6c66c386cc6c6'
+            },
+            {
+                text: 'Y',
+                value: '006666663c181818'
+            },
+            {
+                text: 'Z',
+                value: '007e6030180c067e'
+            },
         ]
     }
 
-    dcMotorControl (args) {
-        const index = args.INDEX;
+    get MENU_NUMBER () {
+        return [
+            {
+                text: '1',
+                value: '0018181c1818187e'
+            },
+            {
+                text: '2',
+                value: '003c6660300c067e'
+            },
+            {
+                text: '3',
+                value: '003c66603860663c'
+            },
+            {
+                text: '4',
+                value: '00303834327e3030'
+            },
+            {
+                text: '5',
+                value: '007e063e6060663c'
+            },
+            {
+                text: '6',
+                value: '003c66063e66663c'
+            },
+            {
+                text: '7',
+                value: '007e663030181818'
+            },
+            {
+                text: '8',
+                value: '003c66663c66663c'
+            },
+            {
+                text: '9',
+                value: '003c66667c60663c'
+            },
+            {
+                text: '0',
+                value: '003c66766e66663c'
+            },
+        ]
+    };
 
-        //if (index >= 0 && index <= 3) {
-        this._peripheral.dcMotorControl(index);
-        //}
+    lceAlpabetControl (args) {
+        const matrix = args.MATRIX;
+        this._peripheral.lceControl(matrix);
 
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 50);
+            }, 500);
+        });
+    }
+
+    lceNumberControl (args) {
+        const matrix = args.MATRIX;
+        this._peripheral.lceControl(matrix);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 500);
         });
     }
 }

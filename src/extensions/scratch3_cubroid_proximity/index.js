@@ -24,13 +24,15 @@ const BLEUUID = {
 */
 const BLEUUID = {
     name: 'Ditance Sensor',
-    serviceStrings: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
+    service_strings: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
     characteristic: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa1',
 };
 
 const ProximityStatus = {
     NEAR: false
 };
+
+const IntervalTime = 200;
 
 class CubroidProximity {
     /**
@@ -54,10 +56,6 @@ class CubroidProximity {
         this._onMessage = this._onMessage.bind(this);
     }
 
-    proximityControl () {
-        this._ble.read(BLEUUID.serviceStrings, BLEUUID.characteristic, false, this._onMessage);
-    }
-
     send (service, characteristic, value) {
         if (!this.isConnected()) return;
         if (this._busy) return;
@@ -76,17 +74,6 @@ class CubroidProximity {
         );
     }
 
-//    scan () {
-//        if (this._ble) {
-//            this._ble.disconnect();
-//        }
-//        this._ble = new BLE(this._runtime, this._extensionId, {
-//            filters: [
-//                {services: [BLEUUID.motor_service, BLEUUID.serviceStrings, BLEUUID.characteristic]}
-//            ]
-//        }, this._onConnect, this.disconnect);
-//    }
-
     scan() {
         if (this._ble) {
             this._ble.disconnect();
@@ -97,7 +84,7 @@ class CubroidProximity {
                 { name: BLEUUID.name }
             ],
             optionalServices: [
-                BLEUUID.serviceStrings
+                BLEUUID.service_strings
             ]
 
         }, this._onConnect, this.reset);
@@ -126,18 +113,23 @@ class CubroidProximity {
         return connected;
     }
 
-    _onConnect() {
-        //this._batteryLevelIntervalId = window.setInterval(() => {
-        //    this._ble.read(BLEUUID.serviceStrings, BLEUUID.characteristic, true, this._onMessage);
-        //}, 1000);
+    ble_read (service, characteristic) {
+        if (!this.isConnected()) return;
+        if (this._busy) return;
+        this._ble.read(service, characteristic, false, this._onMessage);
+    }
 
+    _onConnect() {
+        // console.log("_onConnect")
+        window.setInterval(() => {
+            this.ble_read(BLEUUID.service_strings, BLEUUID.characteristic);
+        }, IntervalTime);
     }
 
     _onMessage(base64) {
-        //const data = Base64Util.base64ToUint8Array(base64);
-        //alert(data)
+        const data = Base64Util.base64ToUint8Array(base64);
         // console.log("_onMessage", data[0]);
-        ProximityStatus.NEAR = base64;
+        ProximityStatus.NEAR = data[0] == 1 ? true : false;
     }
 }
 
@@ -185,25 +177,30 @@ class Scratch3CubroidProximityBlocks {
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'proximityControl',
-                    text: formatMessage({
-                        id: 'cubroidproximity.proximityControl',
-                        default: 'Proximity sensor',
-                        description: 'Cubroid proximity sensor'
-                    }),
-                    blockType: BlockType.BOOLEAN,
-                    arguments: {
-                    }
+                    opcode: 'whenTheDistanceIsClose',
+                    text: '장애물이 감지되었을 때',
+                    blockType: BlockType.HAT,
                 },
+                {
+                    opcode: 'isProximity',
+                    text: '장애물이 감지되었는가?',
+                    blockType: BlockType.BOOLEAN,
+                }
             ],
             menus: {
             }
         };
     }
 
-    proximityControl () {
-        this._peripheral.proximityControl();
-        return ProximityStatus.NEAR === 'AQ==' ? true : false;
+
+    // 버튼이 눌러졌을 때
+    whenTheDistanceIsClose () {
+        return ProximityStatus.NEAR;
+    }
+
+    // 버튼이 눌러졌는가?
+    isProximity () {
+        return ProximityStatus.NEAR;
     }
 }
 

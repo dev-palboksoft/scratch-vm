@@ -1,7 +1,8 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const log = require('../../util/log');
-const cast = require('../../util/cast');
+const Cast = require('../../util/cast');
+const MathUtil = require('../../util/math-util');
 const formatMessage = require('format-message');
 const BLE = require('../../io/ble');
 const Base64Util = require('../../util/base64-util');
@@ -17,7 +18,7 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'Piezo Buzzer-0001',
+    name: 'Piezo Buzzer',
     misc_service: '17009349-c39a-4be1-917b-aed613614910',
     sensor_service: '17009349-c39a-4be1-917b-aed613614911',
 };
@@ -50,32 +51,131 @@ class CubroidSound {
     soundControl (index) {
         var data = [];
         switch (index) {
-            case SoundOptions.DO.name:
-                data = [SoundOptions.DO.command];
+            case SoundOptions.A_DO.name:
+                data = [SoundOptions.A_DO.command];
                 break;
-            case SoundOptions.RE.name:
-                data = [SoundOptions.RE.command];
+            case SoundOptions.A_DO_S.name:
+                data = [SoundOptions.A_DO_S.command];
                 break;
-            case SoundOptions.MI.name:
-                data = [SoundOptions.MI.command];
+            case SoundOptions.A_RE.name:
+                data = [SoundOptions.A_RE.command];
                 break;
-            case SoundOptions.FA.name:
-                data = [SoundOptions.FA.command];
+            case SoundOptions.A_MI_B.name:
+                data = [SoundOptions.A_MI_B.command];
                 break;
-            case SoundOptions.SOL.name:
-                data = [SoundOptions.SOL.command];
+            case SoundOptions.A_MI.name:
+                data = [SoundOptions.A_MI.command];
                 break;
-            case SoundOptions.RA.name:
-                data = [SoundOptions.RA.command];
+            case SoundOptions.A_FA.name:
+                data = [SoundOptions.A_FA.command];
                 break;
-            case SoundOptions.SI.name:
-                data = [SoundOptions.SI.command];
+            case SoundOptions.A_FA_S.name:
+                data = [SoundOptions.A_FA_S.command];
                 break;
-            case SoundOptions.HDO.name:
-                data = [SoundOptions.HDO.command];
+            case SoundOptions.A_SOL.name:
+                data = [SoundOptions.A_SOL.command];
+                break;
+            case SoundOptions.A_SOL_S.name:
+                data = [SoundOptions.A_SOL_S.command];
+                break;
+            case SoundOptions.A_LA.name:
+                data = [SoundOptions.A_LA.command];
+                break;
+            case SoundOptions.A_SI_B.name:
+                data = [SoundOptions.A_SI_B.command];
+                break;
+            case SoundOptions.A_SI.name:
+                data = [SoundOptions.A_SI.command];
+                break;
+            case SoundOptions.B_DO.name:
+                data = [SoundOptions.B_DO.command];
+                break;
+            case SoundOptions.B_DO_S.name:
+                data = [SoundOptions.B_DO_S.command];
+                break;
+            case SoundOptions.B_RE.name:
+                data = [SoundOptions.B_RE.command];
+                break;
+            case SoundOptions.B_MI_B.name:
+                data = [SoundOptions.B_MI_B.command];
+                break;
+            case SoundOptions.B_MI.name:
+                data = [SoundOptions.B_MI.command];
+                break;
+            case SoundOptions.B_FA.name:
+                data = [SoundOptions.B_FA.command];
+                break;
+            case SoundOptions.B_FA_S.name:
+                data = [SoundOptions.B_FA_S.command];
+                break;
+            case SoundOptions.B_SOL.name:
+                data = [SoundOptions.B_SOL.command];
+                break;
+            case SoundOptions.B_SOL_S.name:
+                data = [SoundOptions.B_SOL_S.command];
+                break;
+            case SoundOptions.B_LA.name:
+                data = [SoundOptions.B_LA.command];
+                break;
+            case SoundOptions.B_SI_B.name:
+                data = [SoundOptions.B_SI_B.command];
+                break;
+            case SoundOptions.B_SI.name:
+                data = [SoundOptions.B_SI.command];
+                break;
+            case SoundOptions.C_DO.name:
+                data = [SoundOptions.C_DO.command];
+                break;
+            case SoundOptions.C_RE.name:
+                data = [SoundOptions.C_RE.command];
+                break;
+            case SoundOptions.C_MI.name:
+                data = [SoundOptions.C_MI.command];
+                break;
+            case SoundOptions.C_FA.name:
+                data = [SoundOptions.C_FA.command];
+                break;
+            case SoundOptions.C_SOL.name:
+                data = [SoundOptions.C_SOL.command];
+                break;
+            case SoundOptions.C_LA.name:
+                data = [SoundOptions.C_LA.command];
+                break;
+            case SoundOptions.C_SI.name:
+                data = [SoundOptions.C_SI.command];
+                break;
+            case SoundOptions.D_DO.name:
+                data = [SoundOptions.D_DO.command];
                 break;
             default:
-                data = [SoundOptions.DO.command];
+                data = [SoundOptions.B_DO.command];
+        }
+        return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
+    }
+
+    errorSoundControl (index) {
+        var data = [];
+        switch (index) {
+            case ErrorSoundOptions.SOUND01.name:
+                data = [ErrorSoundOptions.SOUND01.command];
+                break;
+            case ErrorSoundOptions.SOUND02.name:
+                data = [ErrorSoundOptions.SOUND02.command];
+                break;
+            case ErrorSoundOptions.SOUND03.name:
+                data = [ErrorSoundOptions.SOUND03.command];
+                break;
+            case ErrorSoundOptions.SOUND04.name:
+                data = [ErrorSoundOptions.SOUND04.command];
+                break;
+            case ErrorSoundOptions.SOUND05.name:
+                data = [ErrorSoundOptions.SOUND05.command];
+                break;
+            case ErrorSoundOptions.SOUND06.name:
+                data = [ErrorSoundOptions.SOUND06.command];
+                break;
+            default:
+                data = [ErrorSoundOptions.SOUND01.command];
         }
         return this.send(BLEUUID.misc_service, BLEUUID.sensor_service, data);
     }
@@ -147,39 +247,163 @@ class CubroidSound {
     }
 }
 
+const ErrorSoundOptions = {
+    SOUND01: {
+        name: '에러',
+        command: 0x00
+    },
+    SOUND02: {
+        name: '작은 효과',
+        command: 0x02
+    },
+    SOUND03: {
+        name: '경고',
+        command: 0x03
+    },
+    SOUND04: {
+        name: '경쾌한',
+        command: 0x04
+    },
+    SOUND05: {
+        name: '기본',
+        command: 0x05
+    },
+    SOUND06: {
+        name: '큰 효과',
+        command: 0x06
+    },
+
+}
+
 const SoundOptions = {
-    DO: {
-        name: 'DO',
+    A_DO: {
+        name: '도 C(48)',
+        command: 0x62
+    },
+    A_DO_S: {
+        name: '도# C#(49)',
+        command: 0x60
+    },
+    A_RE: {
+        name: '레 D(50)',
+        command: 0x56
+    },
+    A_MI_B: {
+        name: '미b Eb(51)',
+        command: 0x54
+    },
+    A_MI: {
+        name: '미 E(52)',
+        command: 0x50
+    },
+    A_FA: {
+        name: '파 F(53)',
+        command: 0x47
+    },
+    A_FA_S: {
+        name: '파# F#(54)',
+        command: 0x44
+    },
+    A_SOL: {
+        name: '솔 G(55)',
+        command: 0x42
+    },
+    A_SOL_S: {
+        name: '솔# G#(56)',
+        command: 0x40
+    },
+    A_LA: {
+        name: '라 A(57)',
+        command: 0x37
+    },
+    A_SI_B: {
+        name: '시b Bb(58)',
+        command: 0x35
+    },
+    A_SI: {
+        name: '시 B(59)',
+        command: 0x33
+    },
+    B_DO: {
+        name: '도 C(60)',
         command: 0x1b
     },
-    RE: {
-        name: 'RE',
+    B_DO_S: {
+        name: '도# C#(61)',
+        command: 0x30
+    },
+    B_RE: {
+        name: '레 D(62)',
         command: 0x19
     },
-    MI: {
-        name: 'MI',
+    B_MI_B: {
+        name: '미b Eb(63)',
+        command: 0x27
+    },
+    B_MI: {
+        name: '미 E(64)',
         command: 0x17
     },
-    FA: {
-        name: 'FA',
+    B_FA: {
+        name: '파 F(65)',
         command: 0x15
     },
-    SOL: {
-        name: 'SOL',
+    B_FA_S: {
+        name: '파# F#(66)',
+        command: 0x22
+    },
+    B_SOL: {
+        name: '솔 G(67)',
         command: 0x13
     },
-    RA: {
-        name: 'RA',
+    B_SOL_S: {
+        name: '솔# G#(68)',
+        command: 0x20
+    },
+    B_LA: {
+        name: '라 A(69)',
         command: 0x11
     },
-    SI: {
-        name: 'SI',
+    B_SI_B: {
+        name: '시b Bb(70)',
+        command: 0x18
+    },
+    B_SI: {
+        name: '시 B(71)',
         command: 0x0f
     },
-    HDO: {
-        name: 'HDO',
+    C_DO: {
+        name: '도 C(72)',
         command: 0x0d
-    }
+    },
+    C_RE: {
+        name: '레 D(74)',
+        command: 0x95
+    },
+    C_MI: {
+        name: '미 E(76)',
+        command: 0x93
+    },
+    C_FA: {
+        name: '파 F(77)',
+        command: 0x12
+    },
+    C_SOL: {
+        name: '솔 G(79)',
+        command: 0x91
+    },
+    C_LA: {
+        name: '라 A(81)',
+        command: 0x10
+    },
+    C_SI: {
+        name: '시 B(83)',
+        command: 0x09
+    },
+    D_DO: {
+        name: '도 C(84)',
+        command: 0x08
+    },
 }
 
 /**
@@ -199,6 +423,14 @@ class Scratch3CubroidSoundBlocks {
      */
     static get EXTENSION_ID () {
         return 'cubroidsound';
+    }
+
+    static get BEAT_RANGE () {
+        return {min: 0, max: 100};
+    }
+
+    _clampBeats (beats) {
+        return MathUtil.clamp(beats, Scratch3CubroidSoundBlocks.BEAT_RANGE.min, Scratch3CubroidSoundBlocks.BEAT_RANGE.max);
     }
 
     /**
@@ -222,19 +454,83 @@ class Scratch3CubroidSoundBlocks {
     getInfo () {
         return {
             id: Scratch3CubroidSoundBlocks.EXTENSION_ID,
-            name: Scratch3CubroidSoundBlocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroidsound.extensionName',
+                default: 'Sound Block',
+                description: 'Sound Block'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
                     opcode: 'soundControl',
-                    text: 'Sound [SOUND]',
+                    text:  formatMessage({
+                        id: 'cubroidsound.playSoundBlock',
+                        default: 'Play [SOUND]',
+                        description: 'Play [SOUND]'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         SOUND: {
                             type: ArgumentType.STRING,
                             menu: 'soundAction',
-                            defaultValue: SoundOptions.DO.name
+                            defaultValue: SoundOptions.A_DO.name
+                        }
+                    }
+                },
+                {
+                    opcode: 'soundBeatControl',
+                    blockType: BlockType.COMMAND,
+                    text:  formatMessage({
+                        id: 'cubroidsound.playSoundBeatBlock',
+                        default: 'Play [SOUND] for [BEATS] beat',
+                        description: 'Play [SOUND] for [BEATS] beat'
+                    }),
+                    arguments: {
+                        SOUND: {
+                            type: ArgumentType.STRING,
+                            menu: 'soundAction',
+                            defaultValue: SoundOptions.A_DO.name
+                        },
+                        BEATS: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0.25
+                        }
+                    }
+                },
+                {
+                    opcode: 'errorSoundControl',
+                    text:  formatMessage({
+                        id: 'cubroidsound.playErrorSoundBlock',
+                        default: 'Play [ERROR_SOUND]',
+                        description: 'Play [ERROR_SOUND]'
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        ERROR_SOUND: {
+                            type: ArgumentType.STRING,
+                            menu: 'errorSoundAction',
+                            defaultValue: ErrorSoundOptions.SOUND01.name
+                        }
+                    }
+                },
+                {
+                    opcode: 'errorSoundBeatControl',
+                    text:  formatMessage({
+                        id: 'cubroidsound.playErrorSoundBeatBlock',
+                        default: 'Play [ERROR_SOUND] for [BEATS] beat',
+                        description: 'Play [ERROR_SOUND] for [BEATS] beat'
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        ERROR_SOUND: {
+                            type: ArgumentType.STRING,
+                            menu: 'errorSoundAction',
+                            defaultValue: ErrorSoundOptions.SOUND01.name
+                        },
+                        BEATS: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0.25
                         }
                     }
                 },
@@ -243,45 +539,326 @@ class Scratch3CubroidSoundBlocks {
                 soundAction: {
                     acceptReporters: true,
                     items: this.SOUND_ACTION_MENU
+                },
+                errorSoundAction: {
+                    acceptReporters: true,
+                    items: this.ERROR_SOUND_ACTION_MENU
                 }
             }
         };
     }
 
+    get ERROR_SOUND_ACTION_MENU () {
+        return [
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound01',
+                    default: '에러',
+                    description: '에러'
+                }),
+                value: ErrorSoundOptions.SOUND01.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound02',
+                    default: '작은 효과',
+                    description: '작은 효과'
+                }),
+                value: ErrorSoundOptions.SOUND02.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound03',
+                    default: '경고',
+                    description: '경고'
+                }),
+                value: ErrorSoundOptions.SOUND03.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound04',
+                    default: '경쾌한',
+                    description: '경쾌한'
+                }),
+                value: ErrorSoundOptions.SOUND04.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound05',
+                    default: '기본',
+                    description: '기본'
+                }),
+                value: ErrorSoundOptions.SOUND05.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.errorSound06',
+                    default: '큰 효과',
+                    description: '큰 효과'
+                }),
+                value: ErrorSoundOptions.SOUND06.name
+            }
+        ]
+    };
+
     get SOUND_ACTION_MENU () {
         return [
             {
-                text: '도',
-                value: SoundOptions.DO.name
+                text:  formatMessage({
+                    id: 'cubroidSound.ado',
+                    default: '도 C(48)',
+                    description: '도 C(48)'
+                }),
+                value: SoundOptions.A_DO.name
             },
             {
-                text: '레',
-                value: SoundOptions.RE.name
+                text:  formatMessage({
+                    id: 'cubroidSound.ados',
+                    default: '도# C#(49)',
+                    description: '도# C#(49)'
+                }),
+                value: SoundOptions.A_DO_S.name
             },
             {
-                text: '미',
-                value: SoundOptions.MI.name
+                text:  formatMessage({
+                    id: 'cubroidSound.are',
+                    default: '레 D(50)',
+                    description: '레 D(50)'
+                }),
+                value: SoundOptions.A_RE.name
             },
             {
-                text: '파',
-                value: SoundOptions.FA.name
+                text:  formatMessage({
+                    id: 'cubroidSound.amib',
+                    default: '미b Eb(51)',
+                    description: '미b Eb(51)'
+                }),
+                value: SoundOptions.A_MI_B.name
             },
             {
-                text: '솔',
-                value: SoundOptions.SOL.name
+                text:  formatMessage({
+                    id: 'cubroidSound.ami',
+                    default: '미 E(52)',
+                    description: '미 E(52)'
+                }),
+                value: SoundOptions.A_MI.name
             },
             {
-                text: '라',
-                value: SoundOptions.RA.name
+                text:  formatMessage({
+                    id: 'cubroidSound.afa',
+                    default: '파 F(53)',
+                    description: '파 F(53)'
+                }),
+                value: SoundOptions.A_FA.name
             },
             {
-                text: '시',
-                value: SoundOptions.SI.name
+                text:  formatMessage({
+                    id: 'cubroidSound.afas',
+                    default: '파# F#(54)',
+                    description: '파# F#(54)'
+                }),
+                value: SoundOptions.A_FA_S.name
             },
             {
-                text: '도',
-                value: SoundOptions.HDO.name
-            }
+                text:  formatMessage({
+                    id: 'cubroidSound.asol',
+                    default: '솔 G(55)',
+                    description: '솔 G(55)'
+                }),
+                value: SoundOptions.A_SOL.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.asols',
+                    default: '솔# G#(56)',
+                    description: '솔# G#(56)'
+                }),
+                value: SoundOptions.A_SOL_S.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.ala',
+                    default: '라 A(57)',
+                    description: '라 A(57)'
+                }),
+                value: SoundOptions.A_LA.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.asib',
+                    default: '시b Bb(58',
+                    description: '시b Bb(58'
+                }),
+                value: SoundOptions.A_SI_B.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.asi',
+                    default: '시 B(59)',
+                    description: '시 B(59)'
+                }),
+                value: SoundOptions.A_SI.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bdo',
+                    default: '도 C(60)',
+                    description: '도 C(60)'
+                }),
+                value: SoundOptions.B_DO.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bdos',
+                    default: '도# C#(61)',
+                    description: '도# C#(61)'
+                }),
+                value: SoundOptions.B_DO_S.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bre',
+                    default: '레 D(62)',
+                    description: '레 D(62)'
+                }),
+                value: SoundOptions.B_RE.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bmib',
+                    default: '미b Eb(63)',
+                    description: '미b Eb(63)'
+                }),
+                value: SoundOptions.B_MI_B.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bmi',
+                    default: '미 E(64)',
+                    description: '미 E(64)'
+                }),
+                value: SoundOptions.B_MI.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bfa',
+                    default: '파 F(65)',
+                    description: '파 F(65)'
+                }),
+                value: SoundOptions.B_FA.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bfas',
+                    default: '파# F#(66)',
+                    description: '파# F#(66)'
+                }),
+                value: SoundOptions.B_FA_S.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bsol',
+                    default: '솔 G(67)',
+                    description: '솔 G(67)'
+                }),
+                value: SoundOptions.B_SOL.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bsols',
+                    default: '솔# G#(68)',
+                    description: '솔# G#(68)'
+                }),
+                value: SoundOptions.B_SOL_S.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bla',
+                    default: '라 A(69)',
+                    description: '라 A(69)'
+                }),
+                value: SoundOptions.B_LA.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bsib',
+                    default: '시b Bb(70)',
+                    description: '시b Bb(70)'
+                }),
+                value: SoundOptions.B_SI_B.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.bsi',
+                    default: '시 B(71)',
+                    description: '시 B(71)'
+                }),
+                value: SoundOptions.B_SI.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.cdo',
+                    default: '도 C(72)',
+                    description: '도 C(72)'
+                }),
+                value: SoundOptions.C_DO.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.cre',
+                    default: '레 D(74)',
+                    description: '레 D(74)'
+                }),
+                value: SoundOptions.C_RE.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.cmi',
+                    default: '미 E(76)',
+                    description: '미 E(76)'
+                }),
+                value: SoundOptions.C_MI.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.cfa',
+                    default: '파 F(77)',
+                    description: '파 F(77)'
+                }),
+                value: SoundOptions.C_FA.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.csol',
+                    default: '솔 G(79)',
+                    description: '솔 G(79)'
+                }),
+                value: SoundOptions.C_SOL.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.cla',
+                    default: '라 A(81)',
+                    description: '라 A(81)'
+                }),
+                value: SoundOptions.C_LA.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.csi',
+                    default: '시 B(83)',
+                    description: '시 B(83)'
+                }),
+                value: SoundOptions.C_SI.name
+            },
+            {
+                text:  formatMessage({
+                    id: 'cubroidSound.ddo',
+                    default: '도 C(84)',
+                    description: '도 C(84)'
+                }),
+                value: SoundOptions.D_DO.name
+            },
         ]
     }
 
@@ -293,7 +870,66 @@ class Scratch3CubroidSoundBlocks {
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 100);
+            }, 200);
+        });
+    }
+
+    soundBeatControl (args, util) {
+        const sound = args.SOUND;
+        let beats = Cast.toNumber(args.BEATS);
+        beats = (this._clampBeats(beats) * 1000);
+        
+        const SETINTERVAL = setInterval(
+            () => {
+                this._peripheral.soundControl(sound);
+            },
+            50
+        );
+        setTimeout(() => {
+            clearInterval(SETINTERVAL);
+        }, beats);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                clearInterval(SETINTERVAL);
+                resolve();
+            }, beats + 150);
+        });
+    }
+
+    errorSoundControl (args) {
+        const sound = args.ERROR_SOUND;
+
+        this._peripheral.errorSoundControl(sound);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 200);
+        });
+    }
+
+    errorSoundBeatControl (args, util) {
+        const sound = args.ERROR_SOUND;
+        let beats = Cast.toNumber(args.BEATS);
+        beats = (this._clampBeats(beats) * 1000);
+        
+        const SETINTERVAL = setInterval(
+            () => {
+                this._peripheral.errorSoundControl(sound);
+            },
+            50
+        );
+        setTimeout(() => {
+            clearInterval(SETINTERVAL);
+            resolve();
+        }, beats);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                clearInterval(SETINTERVAL);
+                resolve();
+            }, beats + 150);
         });
     }
 }

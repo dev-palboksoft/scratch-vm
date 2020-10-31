@@ -17,7 +17,7 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'DOT MATRIX-0001',
+    name: 'DOT MATRIX',
     service_strings: '268d6478-81c1-4add-837f-2aaab0f860b0',
     characteristic: '268d6478-81c1-4add-837f-2aaab0f860b1',
 };
@@ -389,7 +389,7 @@ class Scratch3CubroidLEDBlocks {
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 500);
+            }, 100);
         });
     }
 
@@ -400,7 +400,7 @@ class Scratch3CubroidLEDBlocks {
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve();
-            }, 500);
+            }, 100);
         });
     }
 }

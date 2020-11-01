@@ -16,7 +16,7 @@ const BLETimeout = 2500;
 const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 const BLEUUID = {
-    name: 'BnL Sensor-0001',
+    name: 'BnL Sensor',
     service_strings_touch: '9f41d229-fb5a-4f9d-9ced-d91154c22220',
     characteristic_touch: '9f41d229-fb5a-4f9d-9ced-d91154c22221',
     service_strings_light: '5a1aad12-5260-49c2-80ed-4bb80a63eaa0',
@@ -99,9 +99,11 @@ class CubroidLightTouch {
             this._ble.disconnect();
         }
 
+        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+
         this._ble = new BLE(this._runtime, this._extensionId, {
             filters: [
-                { name: BLEUUID.name }
+                { name: bleName }
             ],
             optionalServices: [
                 BLEUUID.service_strings_touch, 

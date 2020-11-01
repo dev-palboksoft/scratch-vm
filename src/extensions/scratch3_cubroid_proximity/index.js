@@ -15,13 +15,6 @@ const blockIconURI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYA
 const BLETimeout = 2500;
 const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
-/*
-const BLEUUID = {
-    name: 'Ditance Sensor',
-    misc_service: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
-    sensor_service: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa1',
-};
-*/
 const BLEUUID = {
     name: 'Ditance Sensor',
     service_strings: '499ee8bf-b20a-4dfb-8e47-a6ac0ed5baa0',
@@ -79,9 +72,11 @@ class CubroidProximity {
             this._ble.disconnect();
         }
 
+        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+
         this._ble = new BLE(this._runtime, this._extensionId, {
             filters: [
-                { name: BLEUUID.name }
+                { name: bleName }
             ],
             optionalServices: [
                 BLEUUID.service_strings

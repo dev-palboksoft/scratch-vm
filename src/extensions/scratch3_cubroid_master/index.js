@@ -21,7 +21,7 @@ const BLEDataStoppedError = 'Cubroid extension stopped receiving data';
 
 
 const BLEUUID = {
-    name: 'MASTER-0001',
+    name: 'MASTER',
     service_strings: 'ab4bec65-e0bd-44c1-b12a-cac7f541ae60',
     characteristic: 'ab4bec65-e0bd-44c1-b12a-cac7f541ae61',
 };
@@ -79,9 +79,11 @@ class CubroidMaster {
             this._ble.disconnect();
         }
 
+        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+
         this._ble = new BLE(this._runtime, this._extensionId, {
             filters: [
-                { name: BLEUUID.name }
+                { name: bleName }
             ],
             optionalServices: [
                 BLEUUID.service_strings

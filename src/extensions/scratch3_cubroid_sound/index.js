@@ -203,16 +203,18 @@ class CubroidSound {
             this._ble.disconnect();
         }
 
+        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+    
         this._ble = new BLE(this._runtime, this._extensionId, {
             filters: [
-                { name: BLEUUID.name }
+                { name: bleName }
             ],
             optionalServices: [
                 BLEUUID.misc_service
             ]
 
         }, this._onConnect, this.reset);
-        // console.log("BLEUUID.name = ", BLEUUID.name);
+        // console.log("BLEUUID.name = ", bleName);
     }
 
 

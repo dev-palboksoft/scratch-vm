@@ -87,16 +87,18 @@ class CubroidLED {
             this._ble.disconnect();
         }
 
+        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+
         this._ble = new BLE(this._runtime, this._extensionId, {
             filters: [
-                { name: BLEUUID.name }
+                { name: bleName }
             ],
             optionalServices: [
                 BLEUUID.service_strings
             ]
 
         }, this._onConnect, this.reset);
-        // console.log("BLEUUID.name = ", BLEUUID.name);
+        // console.log("BLEUUID.name = ", bleName);
     }
 
 

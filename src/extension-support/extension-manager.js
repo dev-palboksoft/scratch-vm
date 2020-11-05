@@ -31,7 +31,17 @@ const builtinExtensions = {
     cubroidlighttouch: () => require('../extensions/scratch3_cubroid_lighttouch'),
     cubroidled: () => require('../extensions/scratch3_cubroid_led'),
     cubroidmaster: () => require('../extensions/scratch3_cubroid_master'),
-    tm2scratch: () => require('../extensions/scratch3_tm2scratch')
+    tm2scratch: () => require('../extensions/scratch3_tm2scratch'),
+    ml2scratch: () => require('../extensions/scratch3_ml2scratch'),
+    posenet2scratch: () => require('../extensions/scratch3_posenet2scratch'),
+    facemesh2scratch: () => require('../extensions/scratch3_facemesh2scratch'),
+    handpose2scratch: () => require('../extensions/scratch3_handpose2scratch'),
+    qrcode: () => require('../extensions/scratch3_qrcode'),
+    speech2scratch: () => require('../extensions/scratch3_speech2scratch'),
+    ic2scratch: () => require('../extensions/scratch3_ic2scratch'),
+    tmpose2scratch: () => require('../extensions/scratch3_tmpose2scratch'),
+    iftttwebhooks: () => require('../extensions/scratch3_iftttwebhooks'),
+    //numberbank: () => require('../extensions/scratch3_numberbank')
 };
 
 /**

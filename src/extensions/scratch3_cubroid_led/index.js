@@ -45,6 +45,17 @@ class CubroidLED {
         this.disconnect = this.disconnect.bind(this);
         this._onConnect = this._onConnect.bind(this);
         this._onMessage = this._onMessage.bind(this);
+
+
+        this._sensors = {ledMatrixState: new Uint8Array(8)}
+    }
+
+
+    /**
+     * @return {Uint8Array} - the current state of the 5x5 LED matrix.
+     */
+    get ledMatrixState () {
+        return this._sensors.ledMatrixState;
     }
 
     lceControl (hexString) {
@@ -52,6 +63,11 @@ class CubroidLED {
         // console.log(data)
         return this.send(BLEUUID.service_strings, BLEUUID.characteristic, data);
     }
+
+    lceControl2 (uint8array) {
+        return this.send(BLEUUID.service_strings, BLEUUID.characteristic, uint8array);
+    }
+    
 
     send (service, characteristic, value) {
         if (!this.isConnected()) return;
@@ -219,6 +235,17 @@ class Scratch3CubroidLEDBlocks {
                             type: ArgumentType.MATRIX,
                             menu: 'MenuNumber',
                             defaultValue: '0018181c1818187e'
+                        }
+                    }
+                },
+                {
+                    opcode: 'lceMatrix8x8Control',
+                    text: '[MATRIX] 보여지기',
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        MATRIX: {
+                            type: ArgumentType.MATRIX8X8,
+                            defaultValue: '0000000000000000000000000000000000000000000000000000000000000000'
                         }
                     }
                 },
@@ -398,6 +425,37 @@ class Scratch3CubroidLEDBlocks {
     lceNumberControl (args) {
         const matrix = args.MATRIX;
         this._peripheral.lceControl(matrix);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 100);
+        });
+    }
+
+    lceMatrix8x8Control (args) {
+
+        const symbol = cast.toString(args.MATRIX).replace(/\s/g, '');
+
+        const a0 = parseInt(symbol.substr(0, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a1 = parseInt(symbol.substr(8, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a2 = parseInt(symbol.substr(16, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a3 = parseInt(symbol.substr(24, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a4 = parseInt(symbol.substr(32, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a5 = parseInt(symbol.substr(40, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a6 = parseInt(symbol.substr(48, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a7 = parseInt(symbol.substr(56, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+
+        // console.log(a0)
+        // console.log(a1)
+        // console.log(a2)
+        // console.log(a3)
+        // console.log(a4)
+        // console.log(a5)
+        // console.log(a6)
+        // console.log(a7)
+        const hexString = a7 + a6 + a5 + a4 + a3 + a2 + a1 + a0
+        this._peripheral.lceControl(hexString);
 
         return new Promise(resolve => {
             setTimeout(() => {

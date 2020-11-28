@@ -232,8 +232,8 @@ class Scratch3CubroidLightTouchBlocks {
             id: Scratch3CubroidLightTouchBlocks.EXTENSION_ID,
             name: formatMessage({
                 id: 'cubroidlighttouch.extensionName',
-                default: 'LightNTouch',
-                description: 'LightNTouch'
+                default: '라이트 터치 센서 블록',
+                description: '라이트 터치 센서 블록'
             }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
@@ -242,8 +242,8 @@ class Scratch3CubroidLightTouchBlocks {
                     opcode: 'whenButtonPressed',
                     text: formatMessage({
                         id: 'cubroidlighttouch.whenButtonPressed',
-                        default: 'When button Pressed',
-                        description: 'When button Pressed'
+                        default: '버튼이 눌러졌을 때',
+                        description: '버튼이 눌러졌을 때'
                     }),
                     blockType: BlockType.HAT,
                 },
@@ -251,8 +251,8 @@ class Scratch3CubroidLightTouchBlocks {
                     opcode: 'isButtonPressed',
                     text: formatMessage({
                         id: 'cubroidlighttouch.isButtonPressed',
-                        default: 'Is button pressed?',
-                        description: 'Is button pressed?'
+                        default: '버튼이 눌러졌는가?',
+                        description: '버튼이 눌러졌는가?'
                     }),
                     blockType: BlockType.BOOLEAN,
                 },
@@ -260,8 +260,8 @@ class Scratch3CubroidLightTouchBlocks {
                     opcode: 'whenBrightnessLessThan01',
                     text: formatMessage({
                         id: 'cubroidlighttouch.whenBrightnessLessThan01',
-                        default: 'when brightness < [DISTANCE]',
-                        description: 'when brightness < [DISTANCE]'
+                        default: '빛센서 밝기 < [DISTANCE] 일 때',
+                        description: '빛센서 밝기 < [DISTANCE] 일 때'
                     }),
                     blockType: BlockType.HAT,
                     arguments: {
@@ -275,8 +275,8 @@ class Scratch3CubroidLightTouchBlocks {
                     opcode: 'whenBrightnessLessThan02',
                     text: formatMessage({
                         id: 'cubroidlighttouch.whenBrightnessLessThan02',
-                        default: 'when brightness > [DISTANCE]',
-                        description: 'when brightness > [DISTANCE]'
+                        default: '빛센서 밝기 > [DISTANCE] 일 때',
+                        description: '빛센서 밝기 > [DISTANCE] 일 때'
                     }),
                     blockType: BlockType.HAT,
                     arguments: {

@@ -14,83 +14,148 @@ const Message = {
     'ja': '認識の候補を受け取ったとき',
     'ja-Hira': 'にんしきのこうほをうけとったとき',
     'en': 'when received classification candidates',
-    'zh-cn': '收到分类结果时'
+    'zh-cn': '收到分类候选人时',
+    'ko': '분류 후보를 받았을 때',
+    'de': 'wenn erhalten Klassifizierungskandidaten',
+    'es': 'cuando recibieron candidatos de clasificación',
+    'ru': 'когда получены классификационные кандидаты',
+    'sr': 'kada su primljeni kandidati za klasifikaciju'
   },
   result1: {
     'ja': '候補1',
     'ja-Hira': 'こうほ1',
     'en': 'candidate1',
-    'zh-cn': '结果1'
+    'zh-cn': '候选人1',
+    'ko': '후보1',
+    'de': 'Kandidat1',
+    'es': 'candidato1',
+    'ru': 'кандидат1',
+    'sr': 'kandidat1'
   },
   result2: {
     'ja': '候補2',
     'ja-Hira': 'こうほ2',
     'en': 'candidate2',
-    'zh-cn': '结果2'
+    'zh-cn': '候选人2',
+    'ko': '후보2',
+    'de': 'Kandidat2',
+    'es': 'candidato2',
+    'ru': 'кандидат2',
+    'sr': 'kandidat2'
   },
   result3: {
     'ja': '候補3',
     'ja-Hira': 'こうほ3',
     'en': 'candidate3',
-    'zh-cn': '结果3'
+    'zh-cn': '候选人3',
+    'ko': '후보3',
+    'de': 'Kandidat3',
+    'es': 'candidato3',
+    'ru': 'кандидат3',
+    'sr': 'kandidat3'
   },
   confidence1: {
     'ja': '確信度1',
     'ja-Hira': 'かくしんど1',
     'en': 'confidence1',
-    'zh-cn': '置信度1'
+    'zh-cn': '置信1',
+    'ko': '신뢰1',
+    'de': 'Vertrauen1',
+    'es': 'confianza1',
+    'ru': 'уверенность1',
+    'sr': 'pouzdanje1'
   },
   confidence2: {
     'ja': '確信度2',
     'ja-Hira': 'かくしんど2',
     'en': 'confidence2',
-    'zh-cn': '置信度2'
+    'zh-cn': '置信2',
+    'ko': '신뢰2',
+    'de': 'Vertrauen2',
+    'es': 'confianza2',
+    'ru': 'уверенность2',
+    'sr': 'pouzdanje2'
   },
   confidence3: {
     'ja': '確信度3',
     'ja-Hira': 'かくしんど3',
     'en': 'confidence3',
-    'zh-cn': '置信度3'
+    'zh-cn': '置信3',
+    'ko': '신뢰3',
+    'de': 'Vertrauen3',
+    'es': 'confianza3',
+    'ru': 'уверенность3',
+    'sr': 'pouzdanje3'
   },
   toggle_classification: {
     'ja': '画像認識を[CLASSIFICATION_STATE]にする',
     'ja-Hira': 'がぞうにんしきを[CLASSIFICATION_STATE]にする',
     'en': 'turn classification [CLASSIFICATION_STATE]',
-    'zh-cn': '[CLASSIFICATION_STATE]分类'
+    'zh-cn': '打开分类 [CLASSIFICATION_STATE]',
+    'ko': '분류 켜기 [CLASSIFICATION_STATE]',
+    'de': 'Klassifizierung einschalten [CLASSIFICATION_STATE]',
+    'es': 'activar clasificación [CLASSIFICATION_STATE]',
+    'ru': 'включить классификацию [CLASSIFICATION_STATE]',
+    'sr': 'uključiti klasifikaciju [CLASSIFICATION_STATE]'
   },
   set_classification_interval: {
     'ja': '画像認識を[CLASSIFICATION_INTERVAL]秒間に1回行う',
     'ja-Hira': 'がぞうにんしきを[CLASSIFICATION_INTERVAL]びょうかんに1かいおこなう',
     'en': 'Classify once every [CLASSIFICATION_INTERVAL] seconds',
-    'zh-cn': '每隔[CLASSIFICATION_INTERVAL]秒标记一次'
+    'zh-cn': '每[CLASSIFICATION_INTERVAL]秒分类一次',
+    'ko': '[CLASSIFICATION_INTERVAL]초마다 한 번씩 분류',
+    'de': 'Klassifizieren Sie einmal alle [CLASSIFICATION_INTERVAL] Sekunden',
+    'es': 'Clasifica una vez cada [CLASSIFICATION_INTERVAL] segundos',
+    'ru': 'Классифицировать каждые [CLASSIFICATION_INTERVAL] секунду',
+    'sr': 'Klasificirajte jednom u [CLASSIFICATION_INTERVAL] sekundi'
   },
   video_toggle: {
     'ja': 'ビデオを[VIDEO_STATE]にする',
     'ja-Hira': 'ビデオを[VIDEO_STATE]にする',
     'en': 'turn video [VIDEO_STATE]',
-    'zh-cn': '[VIDEO_STATE]摄像头'
+    'zh-cn': '打开视频[VIDEO_STATE]',
+    'ko': '비디오 켜기 [VIDEO_STATE]',
+    'de': 'Video einschalten [VIDEO_STATE]',
+    'es': 'encender video [VIDEO_STATE]',
+    'ru': 'включить видео [VIDEO_STATE]',
+    'sr': 'uključiti video [VIDEO_STATE]'
   },
   on: {
     'ja': '入',
     'ja-Hira': 'いり',
     'en': 'on',
-    'zh-cn': '开启'
+    'ko': '켜기',
+    'zh-cn': '打开',
+    'de': 'ein',
+    'es': 'activar',
+    'ru': 'включить',
+    'sr': 'uključiti'
   },
   off: {
     'ja': '切',
     'ja-Hira': 'きり',
     'en': 'off',
-    'zh-cn': '关闭'
+    'ko': '끄기',
+    'zh-cn': '关闭',
+    'de': 'aus',
+    'es': 'desactivar',
+    'ru': 'выключить',
+    'sr': 'isključiti'
   },
   video_on_flipped: {
     'ja': '左右反転',
     'ja-Hira': 'さゆうはんてん',
     'en': 'on flipped',
-    'zh-cn': '镜像开启'
-  }
+    'ko': '뒤집힌 상태로 켜기',
+    'zh-cn': '镜像开启',
+    'de': 'auf gespiegelt',
+    'es': 'invertir',
+    'ru': 'включить в обратную',
+    'sr': 'измени укљученост'
+  },
 }
 
-const AvailableLocales = ['en', 'ja', 'ja-Hira', 'zh-cn'];
+const AvailableLocales = ['en', 'ja', 'ja-Hira', 'zh-cn', 'ko', 'de', 'es', 'ru', 'sr'];
 
 class Scratch3ImageClassifierBlocks {
   constructor (runtime) {
@@ -133,7 +198,7 @@ class Scratch3ImageClassifierBlocks {
 
     return {
       id: 'ic2scratch',
-      name: 'ImageClassifier2Scratch',
+      name: 'cubroid ic',
       blockIconURI: blockIconURI,
       blocks: [
         {

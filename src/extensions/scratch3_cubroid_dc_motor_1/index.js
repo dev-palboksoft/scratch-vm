@@ -208,7 +208,11 @@ class Scratch3CubroidDcMotor01Blocks {
     getInfo () {
         return {
             id: Scratch3CubroidDcMotor01Blocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotor01Blocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroiddcmotor01.extensionName',
+                default: 'DC 모터 1번 블록',
+                description: 'DC 모터 1번 블록'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
@@ -216,7 +220,7 @@ class Scratch3CubroidDcMotor01Blocks {
                     opcode: 'dcMotorControl',
                     text: formatMessage({
                         id: 'cubroiddcmotor01.dcMotorControl',
-                        default: 'DC Motor 1 [INDEX]',
+                        default: 'DC 모터 1번을 [INDEX]',
                         description: 'Cubroid dc motor 1'
                     }),
                     blockType: BlockType.COMMAND,
@@ -230,7 +234,11 @@ class Scratch3CubroidDcMotor01Blocks {
                 },
                 {
                     opcode: 'dcMotorControl2',
-                    text: 'DC 모터 1번을 [TIME]초 동안 [INDEX]',
+                    text: formatMessage({
+                        id: 'cubroiddcmotor01.dcMotorControl2',
+                        default: 'DC 모터 1번을 [TIME]초 동안 [INDEX]',
+                        description: 'Cubroid dc motor 1'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         TIME: {
@@ -246,7 +254,11 @@ class Scratch3CubroidDcMotor01Blocks {
                 },
                 {
                     opcode: 'dcMotorStop',
-                    text: 'DC 모터 1번을 끄기',
+                    text: formatMessage({
+                        id: 'cubroiddcmotor01.dcMotorStop',
+                        default: 'DC 모터 1번을 끄기',
+                        description: 'DC 모터 1번을 끄기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                     }

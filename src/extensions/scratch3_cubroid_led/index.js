@@ -210,13 +210,36 @@ class Scratch3CubroidLEDBlocks {
     getInfo () {
         return {
             id: Scratch3CubroidLEDBlocks.EXTENSION_ID,
-            name: Scratch3CubroidLEDBlocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroidled.extensionName',
+                default: 'LED 블록',
+                description: 'LED 블록'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
+                    opcode: 'lceMatrix8x8Control',
+                    text: formatMessage({
+                        id: 'cubroidled.ledMatrixBlock',
+                        default: '[MATRIX] 보여주기',
+                        description: '[MATRIX] 보여주기'
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        MATRIX: {
+                            type: ArgumentType.MATRIX8X8,
+                            defaultValue: '0000000000000000000000000000000000000000000000000000000000000000'
+                        }
+                    }
+                },
+                {
                     opcode: 'lceAlpabetControl',
-                    text: '글자 [MATRIX] 보여지기',
+                    text: formatMessage({
+                        id: 'cubroidled.ledWordBlock',
+                        default: '글자 [MATRIX] 보여주기',
+                        description: '글자 [MATRIX] 보여주기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         MATRIX: {
@@ -228,24 +251,17 @@ class Scratch3CubroidLEDBlocks {
                 },
                 {
                     opcode: 'lceNumberControl',
-                    text: '숫자 [MATRIX] 보여지기',
+                    text: formatMessage({
+                        id: 'cubroidled.ledNumberBlock',
+                        default: '숫자 [MATRIX] 보여주기',
+                        description: '숫자 [MATRIX] 보여주기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         MATRIX: {
                             type: ArgumentType.MATRIX,
                             menu: 'MenuNumber',
                             defaultValue: '0018181c1818187e'
-                        }
-                    }
-                },
-                {
-                    opcode: 'lceMatrix8x8Control',
-                    text: '[MATRIX] 보여지기',
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                        MATRIX: {
-                            type: ArgumentType.MATRIX8X8,
-                            defaultValue: '0000000000000000000000000000000000000000000000000000000000000000'
                         }
                     }
                 },

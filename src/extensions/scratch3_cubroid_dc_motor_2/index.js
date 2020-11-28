@@ -207,7 +207,11 @@ class Scratch3CubroidDcMotor02Blocks {
     getInfo () {
         return {
             id: Scratch3CubroidDcMotor02Blocks.EXTENSION_ID,
-            name: Scratch3CubroidDcMotor02Blocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroiddcmotor02.extensionName',
+                default: 'DC 모터 2번 블록',
+                description: 'DC 모터 2번 블록'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
@@ -215,8 +219,8 @@ class Scratch3CubroidDcMotor02Blocks {
                     opcode: 'dcMotorControl',
                     text: formatMessage({
                         id: 'cubroiddcmotor02.dcMotorControl',
-                        default: 'DC Motor 2 [INDEX]',
-                        description: 'Cubroid dc motor 2'
+                        default: 'DC 모터 2번을 [INDEX]',
+                        description: 'DC 모터 2번을 [INDEX]'
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
@@ -229,7 +233,11 @@ class Scratch3CubroidDcMotor02Blocks {
                 },
                 {
                     opcode: 'dcMotorControl2',
-                    text: 'DC 모터 2번을 [TIME]초 동안 [INDEX]',
+                    text: formatMessage({
+                        id: 'cubroiddcmotor02.dcMotorControl2',
+                        default: 'DC 모터 2번을 [TIME]초 동안 [INDEX]',
+                        description: 'DC 모터 2번을 [TIME]초 동안 [INDEX]'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         TIME: {
@@ -245,7 +253,11 @@ class Scratch3CubroidDcMotor02Blocks {
                 },
                 {
                     opcode: 'dcMotorStop',
-                    text: 'DC 모터 2번을 끄기',
+                    text: formatMessage({
+                        id: 'cubroiddcmotor02.dcMotorStop',
+                        default: 'DC 모터 2번을 끄기',
+                        description: 'DC 모터 2번을 끄기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                     }

@@ -19,64 +19,114 @@ const Message = {
     'ja': '[PERSON_NUMBER] 人目の [KEYPOINT] 番目の部位のx座標',
     'ja-Hira': '[PERSON_NUMBER] にんめの [KEYPOINT] ばんめのぶいのxざひょう',
     'en': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
-    'ko': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]'
+    'ko': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'zh-cn': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'de': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'es': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'ru': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'sr': 'x of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]'
   },
   getY: {
     'ja': '[PERSON_NUMBER] 人目の [KEYPOINT] 番目の部位のy座標',
     'ja-Hira': '[PERSON_NUMBER] にんめの [KEYPOINT] ばんめのぶいのyざひょう',
     'en': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
-    'ko': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]'
+    'ko': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'zh-cn': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'de': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'es': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'ru': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]',
+    'sr': 'y of person no: [PERSON_NUMBER] , keypoint no: [KEYPOINT]'
   },
   peopleCount: {
     'ja': '人数',
     'ja-Hira': 'にんずう',
     'en': 'people count',
-    'ko': 'people count'
+    'ko': 'people count',
+    'zh-cn': 'people count',
+    'de': 'people count',
+    'es': 'people count',
+    'ru': 'people count',
+    'sr': 'people count'
   },
   videoToggle: {
     'ja': 'ビデオを [VIDEO_STATE] にする',
     'ja-Hira': 'ビデオを [VIDEO_STATE] にする',
     'en': 'turn video [VIDEO_STATE]',
-    'ko': 'turn video [VIDEO_STATE]'
+    'ko': '비디오 켜기 [VIDEO_STATE]',
+    'zh-cn': '打开视频 [VIDEO_STATE]',
+    'de': 'Video einschalten [VIDEO_STATE]',
+    'es': 'encender video [VIDEO_STATE]',
+    'ru': 'включить видео [VIDEO_STATE]',
+    'sr': 'uključiti video [VIDEO_STATE]'
   },
   setRatio: {
     'ja': '倍率を [RATIO] にする',
     'ja-Hira': 'ばいりつを [RATIO] にする',
     'en': 'set ratio to [RATIO]',
-    'ko': 'set ratio to [RATIO]'
+    'ko': '비율 [RATIO] 설정',
+    'zh-cn': '将比率设置为 [RATIO]',
+    'de': 'Stellen Sie das Verhältnis auf [RATIO]',
+    'es': 'establecer la relación en [RATIO]',
+    'ru': 'установить коэффициент [RATIO]',
+    'sr': 'postavite omjer na [RATIO]'
   },
   setInterval: {
     'ja': '認識を [INTERVAL] 秒ごとに行う',
     'ja-Hira': 'にんしきを [INTERVAL] びょうごとにおこなう',
     'en': 'Label once every [INTERVAL] seconds',
-    'ko': 'Label once every [INTERVAL] seconds'
+    'ko': '[INTERVAL] 초마다 한 번씩 레이블',
+    'zh-cn': '每 [INTERVAL] 秒标记一次',
+    'de': 'Beschriften Sie einmal alle [INTERVAL] Sekunden',
+    'es': 'Etiquetar una vez cada [INTERVAL] segundos',
+    'ru': 'Пометить каждые [INTERVAL] секунды',
+    'sr': 'Označi jednom u [INTERVAL] sekunde'
   },
   on: {
     'ja': '入',
     'ja-Hira': 'いり',
     'en': 'on',
-    'ko': 'on'
+    'zh-cn': '打开',
+    'ko': '켜기',
+    'de': 'ein',
+    'es': 'activar',
+    'ru': 'включить',
+    'sr': 'uključiti'
   },
   off: {
     'ja': '切',
     'ja-Hira': 'きり',
     'en': 'off',
-    'ko': 'off'
+    'zh-cn': '关闭',
+    'ko': '끄기',
+    'de': 'aus',
+    'es': 'desactivar',
+    'ru': 'выключить',
+    'sr': 'isključiti'
   },
   video_on_flipped: {
     'ja': '左右反転',
     'ja-Hira': 'さゆうはんてん',
     'en': 'on flipped',
-    'ko': 'on flipped'
+    'ko': 'on flipped',
+    'zh-cn': 'on flipped',
+    'de': 'on flipped',
+    'es': 'on flipped',
+    'ru': 'on flipped',
+    'sr': 'on flipped'
   },
   please_wait: {
     'ja': '準備に時間がかかります。少しの間、操作ができなくなりますがお待ち下さい。',
     'ja-Hira': 'じゅんびにじかんがかかります。すこしのあいだ、そうさができなくなりますがおまちください。',
     'en': 'Setup takes a while. The browser will get stuck, but please wait.',
-    'ko': 'Setup takes a while. The browser will get stuck, but please wait.'
+    'ko': '설정하는 데 시간이 걸립니다. 브라우저가 중단되지만 잠시 기다려주십시오.',
+    'zh-cn': '安装程序需要一段时间。 浏览器将卡住，但请稍候。',
+    'de': 'Das Setup dauert eine Weile. Der Browser bleibt hängen, aber bitte warten Sie.',
+    'es': 'La instalación lleva un tiempo. El navegador se bloqueará, pero espere.',
+    'ru': 'Настройка требует времени. Браузер зависнет, но подождите.',
+    'sr': 'Postavljanje traje neko vrijeme. Preglednik će zapeti, ali pričekajte.'
   }
 }
-const AvailableLocales = ['en', 'ja', 'ja-Hira', 'ko'];
+const AvailableLocales = ['en', 'ja', 'ja-Hira', 'ko', 'zh-cn', 'de', 'es', 'ru', 'sr'];
 
 class Scratch3Facemesh2ScratchBlocks {
     get PERSON_NUMBER_MENU () {
@@ -206,7 +256,7 @@ class Scratch3Facemesh2ScratchBlocks {
 
         return {
             id: 'facemesh2scratch',
-            name: 'Facemesh2Scratch',
+            name: 'cubroid Facemesh',
             blockIconURI: blockIconURI,
             blocks: [
                 {

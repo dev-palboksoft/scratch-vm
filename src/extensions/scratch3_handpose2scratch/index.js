@@ -18,157 +18,337 @@ const Message = {
   getX: {
     'ja': '[LANDMARK] のx座標',
     'ja-Hira': '[LANDMARK] のxざひょう',
-    'en': 'x of [LANDMARK]'
+    'en': 'x of [LANDMARK]',
+    'ko': 'x of [LANDMARK]',
+    'zh-cn': 'x of [LANDMARK]',
+    'de': 'x of [LANDMARK]',
+    'es': 'x of [LANDMARK]',
+    'ru': 'x of [LANDMARK]',
+    'sr': 'x of [LANDMARK]'
   },
   getY: {
     'ja': '[LANDMARK] のy座標',
     'ja-Hira': '[LANDMARK] のyざひょう',
-    'en': 'y of [LANDMARK]'
+    'en': 'y of [LANDMARK]',
+    'ko': 'y of [LANDMARK]',
+    'zh-cn': 'y of [LANDMARK]',
+    'de': 'y of [LANDMARK]',
+    'es': 'y of [LANDMARK]',
+    'ru': 'y of [LANDMARK]',
+    'sr': 'y of [LANDMARK]'
   },
   videoToggle: {
     'ja': 'ビデオを [VIDEO_STATE] にする',
     'ja-Hira': 'ビデオを [VIDEO_STATE] にする',
-    'en': 'turn video [VIDEO_STATE]'
+    'en': 'turn video [VIDEO_STATE]',
+    'ko': '비디오 켜기 [VIDEO_STATE]',
+    'zh-cn': '打开视频 [VIDEO_STATE]',
+    'de': 'Video einschalten [VIDEO_STATE]',
+    'es': 'encender video [VIDEO_STATE]',
+    'ru': 'включить видео [VIDEO_STATE]',
+    'sr': 'uključiti video [VIDEO_STATE]'
   },
   setRatio: {
     'ja': '倍率を [RATIO] にする',
     'ja-Hira': 'ばいりつを [RATIO] にする',
-    'en': 'set ratio to [RATIO]'
+    'en': 'set ratio to [RATIO]',
+    'ko': '비율 [RATIO] 설정',
+    'zh-cn': '将比率设置为 [RATIO]',
+    'de': 'Stellen Sie das Verhältnis auf [RATIO]',
+    'es': 'establecer la relación en [RATIO]',
+    'ru': 'установить коэффициент [RATIO]',
+    'sr': 'postavite omjer na [RATIO]'
   },
   setInterval: {
     'ja': '認識を [INTERVAL] 秒ごとに行う',
     'ja-Hira': 'にんしきを [INTERVAL] びょうごとにおこなう',
-    'en': 'Label once every [INTERVAL] seconds'
+    'en': 'Label once every [INTERVAL] seconds',
+    'ko': '[INTERVAL] 초마다 한 번씩 레이블',
+    'zh-cn': '每 [INTERVAL] 秒标记一次',
+    'de': 'Beschriften Sie einmal alle [INTERVAL] Sekunden',
+    'es': 'Etiquetar una vez cada [INTERVAL] segundos',
+    'ru': 'Пометить каждые [INTERVAL] секунды',
+    'sr': 'Označi jednom u [INTERVAL] sekunde'
   },
   on: {
     'ja': '入',
     'ja-Hira': 'いり',
-    'en': 'on'
+    'en': 'on',
+    'zh-cn': '打开',
+    'ko': '켜기',
+    'de': 'ein',
+    'es': 'activar',
+    'ru': 'включить',
+    'sr': 'uključiti'
   },
   off: {
     'ja': '切',
     'ja-Hira': 'きり',
-    'en': 'off'
+    'en': 'off',
+    'zh-cn': '关闭',
+    'ko': '끄기',
+    'de': 'aus',
+    'es': 'desactivar',
+    'ru': 'выключить',
+    'sr': 'isključiti'
   },
   video_on_flipped: {
     'ja': '左右反転',
     'ja-Hira': 'さゆうはんてん',
-    'en': 'on flipped'
+    'en': 'on flipped',
+    'ko': '뒤집힌 상태로 켜기',
+    'zh-cn': '镜像开启',
+    'de': 'auf gespiegelt',
+    'es': 'invertir',
+    'ru': 'включить в обратную',
+    'sr': 'измени укљученост'
   },
   please_wait: {
     'ja': '準備に時間がかかります。少しの間、操作ができなくなりますがお待ち下さい。',
     'ja-Hira': 'じゅんびにじかんがかかります。すこしのあいだ、そうさができなくなりますがおまちください。',
-    'en': 'Setup takes a while. The browser will get stuck, but please wait.'
+    'en': 'Setup takes a while. The browser will get stuck, but please wait.',
+    'ko': '설정하는 데 시간이 걸립니다. 브라우저가 중단되지만 잠시 기다려주십시오.',
+    'zh-cn': '安装程序需要一段时间。 浏览器将卡住，但请稍候。',
+    'de': 'Das Setup dauert eine Weile. Der Browser bleibt hängen, aber bitte warten Sie.',
+    'es': 'La instalación lleva un tiempo. El navegador se bloqueará, pero espere.',
+    'ru': 'Настройка требует времени. Браузер зависнет, но подождите.',
+    'sr': 'Postavljanje traje neko vrijeme. Preglednik će zapeti, ali pričekajte.'
   },
   landmarks: [
     {
       'ja': '手首',
       'ja-Hira': 'てくび',
-      'en': 'wrist'
+      'en': 'wrist',
+      'ko': '손목',
+      'zh-cn': '手腕',
+      'de': 'Handgelenk',
+      'es': 'muñeca',
+      'ru': 'запястье',
+      'sr': 'zglob'
     },
     {
       'ja': '親指の根元',
       'ja-Hira': 'おやゆびのねもと',
-      'en': 'the base of thumb'
+      'en': 'the base of thumb',
+      'ko': '엄지손가락의 밑부분',
+      'zh-cn': '拇指根部',
+      'de': 'die Daumenbasis',
+      'es': 'la base del pulgar',
+      'ru': 'основание большого пальца',
+      'sr': 'osnova palca'
     },
     {
       'ja': '親指の第2関節',
       'ja-Hira': 'おやゆびのだい2かんせつ',
-      'en': 'the 2nd joint of thumb'
+      'en': 'the 2nd joint of thumb',
+      'ko': '엄지손가락의 제2관절',
+      'zh-cn': '拇指第二关节',
+      'de': 'das 2. Daumengelenk',
+      'es': 'la segunda articulación del pulgar',
+      'ru': '2-й сустав большого пальца',
+      'sr': '2. zglob palca'
     },
     {
       'ja': '親指の第1関節',
       'ja-Hira': 'おやゆびのだい1かんせつ',
-      'en': 'the 1st joint of thumb'
+      'en': 'the 1st joint of thumb',
+      'ko': '엄지손가락 제1관절',
+      'zh-cn': '拇指第一关节',
+      'de': 'das 1. Daumengelenk',
+      'es': 'la 1ra articulación del pulgar',
+      'ru': '1-й сустав большого пальца',
+      'sr': '1. zglob palca'
     },
     {
       'ja': '親指の先端',
       'ja-Hira': 'おやゆびのさき',
-      'en': 'thumb'
+      'en': 'thumb',
+      'ko': '엄지손가락',
+      'zh-cn': '拇指',
+      'de': 'Daumen',
+      'es': 'pulgar',
+      'ru': 'большой палец',
+      'sr': 'thumb'
     },
     {
       'ja': '人差し指の第3関節',
       'ja-Hira': 'ひとさしゆびのだい3かんせつ',
-      'en': 'the 3rd joint of index finger'
+      'en': 'the 3rd joint of index finger',
+      'ko': '집게손가락 제3관절',
+      'zh-cn': '食指第三关节',
+      'de': 'das 3. Zeigefingergelenk',
+      'es': 'la tercera articulación del dedo índice',
+      'ru': '3-й сустав указательного пальца',
+      'sr': '3. zglob kažiprsta'
     },
     {
       'ja': '人差し指の第2関節',
       'ja-Hira': 'ひとさしゆびのだい2かんせつ',
-      'en': 'the 2nd joint of index finger'
+      'en': 'the 2nd joint of index finger',
+      'ko': '집게손가락 제2관절',
+      'zh-cn': '食指第二关节',
+      'de': 'das 2. Zeigefingergelenk',
+      'es': 'la segunda articulación del dedo índice',
+      'ru': '2-й сустав указательного пальца',
+      'sr': '2. zglob kažiprsta'
     },
     {
       'ja': '人差し指の第1関節',
       'ja-Hira': 'ひとさしゆびのだい1かんせつ',
-      'en': 'the 1st joint of index finger'
+      'en': 'the 1st joint of index finger',
+      'ko': '집게손가락 제1관절',
+      'zh-cn': '食指第一关节',
+      'de': 'das 1. Zeigefingergelenk',
+      'es': 'la primera articulación del dedo índice',
+      'ru': '1-й сустав указательного пальца',
+      'sr': '1. zglob kažiprsta'
     },
     {
       'ja': '人差し指の先端',
       'ja-Hira': 'ひとさしゆびのせんたん',
-      'en': 'index finger'
+      'en': 'index finger',
+      'ko': '집게손가락',
+      'zh-cn': '食指',
+      'de': 'Zeigefinger',
+      'es': 'dedo índice',
+      'ru': 'указательный палец',
+      'sr': 'kažiprst'
     },
     {
       'ja': '中指の第3関節',
       'ja-Hira': 'なかゆびのだい3かんせつ',
-      'en': 'the 3rd joint of middle finger'
+      'en': 'the 3rd joint of middle finger',
+      'ko': '가운데 손가락의 제3관절',
+      'zh-cn': '中指的第三关节',
+      'de': 'das 3. Mittelfingergelenk',
+      'es': 'la tercera articulación del dedo medio',
+      'ru': '3-й сустав среднего пальца',
+      'sr': '3. zglob srednjeg prsta'
     },
     {
       'ja': '中指の第2関節',
       'ja-Hira': 'なかゆびのだい2かんせつ',
-      'en': 'the 2nd joint of middle finger'
+      'en': 'the 2nd joint of middle finger',
+      'ko': '가운데 손가락의 제2관절',
+      'zh-cn': '中指第二关节',
+      'de': 'das 2. Gelenk des Mittelfingers',
+      'es': 'la segunda articulación del dedo medio',
+      'ru': '2-й сустав среднего пальца',
+      'sr': '2. zglob srednjeg prsta'
     },
     {
       'ja': '中指の第1関節',
       'ja-Hira': 'なかゆびのだい1かんせつ',
-      'en': 'the 1st joint of middle finger'
+      'en': 'the 1st joint of middle finger',
+      'ko': '가운데 손가락의 제1관절',
+      'zh-cn': '中指第一关节',
+      'de': 'das 1. Gelenk des Mittelfingers',
+      'es': 'la primera articulación del dedo medio',
+      'ru': '1-й сустав среднего пальца',
+      'sr': '1. zglob srednjeg prsta'
     },
     {
       'ja': '中指の先端',
       'ja-Hira': 'なかゆびのせんたん',
-      'en': 'middle finger'
+      'en': 'middle finger',
+      'ko': '가운데 손가락',
+      'zh-cn': '中指',
+      'de': 'Mittelfinger',
+      'es': 'dedo medio',
+      'ru': 'средний палец',
+      'sr': 'srednji prst'
     },
     {
       'ja': '薬指の第3関節',
       'ja-Hira': 'くすりゆびのだい3かんせつ',
-      'en': 'the 3rd joint of ring finger'
+      'en': 'the 3rd joint of ring finger',
+      'ko': '약지의 제3관절',
+      'zh-cn': '无名指的第三关节',
+      'de': 'das 3. Gelenk des Ringfingers',
+      'es': 'la tercera articulación del dedo anular',
+      'ru': '3-й сустав безымянного пальца',
+      'sr': '3. zglob prstenjaka'
     },
     {
       'ja': '薬指の第2関節',
       'ja-Hira': 'くすりゆびのだい2かんせつ',
-      'en': 'the 2nd joint of ring finger'
+      'en': 'the 2nd joint of ring finger',
+      'ko': '약지의 제2관절',
+      'zh-cn': '无名指第二关节',
+      'de': 'das 2. Gelenk des Ringfingers',
+      'es': 'la segunda articulación del dedo anular',
+      'ru': '2-й сустав безымянного пальца',
+      'sr': '2. zglob prstenjaka'
     },
     {
       'ja': '薬指の第1関節',
       'ja-Hira': 'くすりゆびのだい1かんせつ',
-      'en': 'the 1st joint of ring finger'
+      'en': 'the 1st joint of ring finger',
+      'ko': '약지의 제1관절',
+      'zh-cn': '无名指的第一关节',
+      'de': 'das 1. Gelenk des Ringfingers',
+      'es': 'la primera articulación del dedo anular',
+      'ru': '1-й сустав безымянного пальца',
+      'sr': '1. zglob prstenjaka'
     },
     {
       'ja': '薬指の先端',
       'ja-Hira': 'くすりゆびのせんたん',
-      'en': 'ring finger'
+      'en': 'ring finger',
+      'ko': '약지',
+      'zh-cn': '无名指',
+      'de': 'Ringfinger',
+      'es': 'dedo anular',
+      'ru': 'безымянный палец',
+      'sr': 'prsten'
     },
     {
       'ja': '小指の第3関節',
       'ja-Hira': 'こゆびのだい3かんせつ',
-      'en': 'the 3rd joint of little finger'
+      'en': 'the 3rd joint of little finger',
+      'ko': '새끼손가락 제3관절',
+      'zh-cn': '小指第三关节',
+      'de': 'das 3. Gelenk des kleinen Fingers',
+      'es': 'la tercera articulación del dedo meñique',
+      'ru': '3-й сустав мизинца',
+      'sr': '3. zglob malog prsta'
     },
     {
       'ja': '小指の第2関節',
       'ja-Hira': 'こゆびのだい2かんせつ',
-      'en': 'the 2nd joint of little finger'
+      'en': 'the 2nd joint of little finger',
+      'ko': '새끼손가락 제2관절',
+      'zh-cn': '小指第二关节',
+      'de': 'das 2. Gelenk des kleinen Fingers',
+      'es': 'la segunda articulación del dedo meñique',
+      'ru': '2-й сустав мизинца',
+      'sr': '2. zglob malog prsta'
     },
     {
       'ja': '小指の第1関節',
       'ja-Hira': 'こゆびのだい1かんせつ',
-      'en': 'the 1st joint of little finger'
+      'en': 'the 1st joint of little finger',
+      'ko': '새끼손가락 제1관절',
+      'zh-cn': '小指第一关节',
+      'de': 'das 1. Gelenk des kleinen Fingers',
+      'es': 'la 1a articulación del dedo meñique',
+      'ru': '1-й сустав мизинца',
+      'sr': '1. zglob malog prsta'
     },
     {
       'ja': '小指の先端',
       'ja-Hira': 'こゆびのせんたん',
-      'en': 'little finger'
+      'en': 'little finger',
+      'ko': '새끼 손가락',
+      'zh-cn': '小指',
+      'de': 'kleiner Finger',
+      'es': 'dedo pequeño',
+      'ru': 'маленький палец',
+      'sr': 'mali prst'
     }
   ]
 }
-const AvailableLocales = ['en', 'ja', 'ja-Hira'];
+const AvailableLocales = ['en', 'ja', 'ja-Hira', 'ko', 'zh-cn', 'de', 'es', 'ru', 'sr'];
 
 class Scratch3Handpose2ScratchBlocks {
     get LANDMARK_MENU () {
@@ -287,7 +467,7 @@ class Scratch3Handpose2ScratchBlocks {
 
         return {
             id: 'handpose2scratch',
-            name: 'Handpose2Scratch',
+            name: 'cubroid hand pose',
             blockIconURI: blockIconURI,
             blocks: [
                 {

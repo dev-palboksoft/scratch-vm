@@ -167,18 +167,30 @@ class Scratch3CubroidProximityBlocks {
     getInfo () {
         return {
             id: Scratch3CubroidProximityBlocks.EXTENSION_ID,
-            name: Scratch3CubroidProximityBlocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroidproximity.extensionName',
+                default: '근접 센서 블록',
+                description: '근접 센서 블록'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
                     opcode: 'whenTheDistanceIsClose',
-                    text: '장애물이 감지되었을 때',
+                    text: formatMessage({
+                        id: 'cubroidproximity.proximityControl',
+                        default: '장애물이 감지되었을 때',
+                        description: '장애물이 감지되었을 때'
+                    }),
                     blockType: BlockType.HAT,
                 },
                 {
                     opcode: 'isProximity',
-                    text: '장애물이 감지되었는가?',
+                    text: formatMessage({
+                        id: 'cubroidproximity.isProximityControl',
+                        default: '장애물이 감지되었는가?',
+                        description: '장애물이 감지되었는가?'
+                    }),
                     blockType: BlockType.BOOLEAN,
                 }
             ],

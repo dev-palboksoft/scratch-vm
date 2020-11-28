@@ -175,13 +175,21 @@ class Scratch3CubroidMasterBlocks {
     getInfo () {
         return {
             id: Scratch3CubroidMasterBlocks.EXTENSION_ID,
-            name: Scratch3CubroidMasterBlocks.EXTENSION_NAME,
+            name: formatMessage({
+                id: 'cubroidmaster.extensionName',
+                default: '마스터 블록',
+                description: '마스터 블록'
+            }),
             blockIconURI: blockIconURI,
             showStatusButton: true,
             blocks: [
                 {
                     opcode: 'colorControl',
-                    text: '마스터블록 [COLOR]',
+                    text: formatMessage({
+                        id: 'cubroidmaster.colorControl',
+                        default: '[COLOR] 색 불빛 켜기',
+                        description: '[COLOR] 색 불빛 켜기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                         COLOR: {
@@ -193,7 +201,11 @@ class Scratch3CubroidMasterBlocks {
                 },
                 {
                     opcode: 'colorOffControl',
-                    text: '마스터블록 끄기',
+                    text: formatMessage({
+                        id: 'cubroidmaster.colorOff',
+                        default: '불빛 끄기',
+                        description: '불빛 끄기'
+                    }),
                     blockType: BlockType.COMMAND,
                     arguments: {
                     }

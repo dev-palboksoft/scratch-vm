@@ -12,155 +12,258 @@ const Message = {
         'ja': '画像分類モデルURL[URL]',
         'ja-Hira': 'がぞうぶんるいモデル[URL]',
         'en': 'image classification model URL [URL]',
-        'ko': 'image classification model URL [URL]'
+        'ko': '이미지 분류 모델 URL [URL]',
+        'zh-cn': '图片分类模型网址 [URL]',
+        'de': 'URL des Bildklassifizierungsmodells [URL]',
+        'es': 'URL del modelo de clasificación de imágenes [URL]',
+        'ru': 'URL модели классификации изображений [URL]',
+        'sr': 'URL modela modela klasifikacije slika [URL]'
     },
     sound_classification_model_url: {
         'ja': '音声分類モデルURL[URL]',
         'ja-Hira': 'おんせいぶんるいモデル[URL]',
         'en': 'sound classification model URL [URL]',
-        'ko': 'sound classification model URL [URL]'
+        'ko': '사운드 분류 모델 URL [URL]',
+        'zh-cn': '声音分类模型URL [URL]',
+        'de': 'URL des Soundklassifizierungsmodells [URL]',
+        'es': 'URL del modelo de clasificación de sonido [URL]',
+        'ru': 'URL модели классификации звука [URL]',
+        'sr': 'URL modela zvučne klasifikacije [URL]'
     },
     classify_image: {
         'ja': '画像を分類する',
         'ja-Hira': 'がぞうをぶんるいする',
         'en': 'classify image',
-        'ko': 'classify image'
+        'ko': '이미지 분류',
+        'zh-cn': '分类图像',
+        'de': 'Bild klassifizieren',
+        'es': 'clasificar imagen',
+        'ru': 'классифицировать изображение',
+        'sr': 'klasificirati sliku'
     },
     image_label: {
         'ja': '画像ラベル',
         'ja-Hira': 'がぞうラベル',
         'en': 'image label',
-        'ko': 'image label'
+        'ko': '이미지 레이블',
+        'zh-cn': '图片标签',
+        'de': 'Bildetikett',
+        'es': 'etiqueta de imagen',
+        'ru': 'метка изображения',
+        'sr': 'oznaka slike'
     },
     sound_label: {
         'ja': '音声ラベル',
         'ja-Hira': 'おんせいラベル',
         'en': 'sound label',
-        'ko': 'sound label'
+        'ko': '사운드 레이블',
+        'zh-cn': '声音标签',
+        'de': 'Sound Label',
+        'es': 'etiqueta de sonido',
+        'ru': 'звуковой лейбл',
+        'sr': 'zvučna etiketa'
     },
     when_received_block: {
         'ja': '画像ラベル[LABEL]を受け取ったとき',
         'ja-Hira': 'がぞうラベル[LABEL]をうけとったとき',
         'en': 'when received image label:[LABEL]',
-        'zh-cn': '接收到类别[LABEL]时',
-        'ko': 'when received image label:[LABEL]'
+        'zh-cn': '收到图像标签时:[LABEL]',
+        'ko': '수신된 이미지 레이블:[LABEL]',
+        'de': 'bei Erhalt Bildetikett:[LABEL]',
+        'es': 'cuando se recibe la etiqueta de imagen:[LABEL]',
+        'ru': 'при получении метка изображения:[LABEL]',
+        'sr': 'kada je primljena oznaka slike:[LABEL]'
     },
     is_image_label_detected: {
         'ja': '[LABEL]の画像が見つかった',
         'ja-Hira': '[LABEL]のがぞうがみつかった',
         'en': 'image [LABEL] detected',
-        'ko': 'image [LABEL] detected'
+        'ko': '[LABEL] 이미지 감지',
+        'zh-cn': '检测到图像 [LABEL]',
+        'de': 'Bild [LABEL] erkannt',
+        'es': 'imagen [LABEL] detectada',
+        'ru': 'изображение [LABEL] обнаружено',
+        'sr': 'otkrivena slika [LABEL]'
     },
     is_sound_label_detected: {
         'ja': '[LABEL]の音声が聞こえた',
         'ja-Hira': '[LABEL]のおんせいがきこえた',
         'en': 'sound [LABEL] detected',
-        'ko': 'sound [LABEL] detected'
+        'ko': '[LABEL] 사운드 감지',
+        'zh-cn': '检测到声音 [LABEL]',
+        'de': 'Ton [LABEL] erkannt',
+        'es': 'sonido [LABEL] detectado',
+        'ru': 'звук [LABEL] обнаружен',
+        'sr': 'otkriven zvuk [LABEL]'
     },
     image_label_confidence: {
         'ja': '画像ラベル[LABEL]の確度',
         'ja-Hira': 'がぞうラベル[LABEL]のかくど',
         'en': 'confidence of image [LABEL]',
-        'ko': 'confidence of image [LABEL]'
+        'ko': '이미지의 신뢰도 [LABEL]',
+        'zh-cn': '图像的置信度 [LABEL]',
+        'de': 'Vertrauen des Bildes [LABEL]',
+        'es': 'confianza en la imagen [LABEL]',
+        'ru': 'уверенность в изображении [LABEL]',
+        'sr': 'povjerenje u sliku [LABEL]'
     },
     sound_label_confidence: {
         'ja': '音声ラベル[LABEL]の確度',
         'ja-Hira': 'おんせいラベル[LABEL]のかくど',
         'en': 'confidence of sound [LABEL]',
-        'ko': 'confidence of sound [LABEL]'
+        'ko': '사운드의 신뢰도 [LABEL]',
+        'zh-cn': '声音的信心 [LABEL]',
+        'de': 'Vertrauen in den Klang [LABEL]',
+        'es': 'confianza en el sonido [LABEL]',
+        'ru': 'уверенность в звуке [LABEL]',
+        'sr': 'pouzdanost zvuka [LABEL]'
     },
     when_received_sound_label_block: {
         'ja': '音声ラベル[LABEL]を受け取ったとき',
         'ja-Hira': '音声ラベル[LABEL]をうけとったとき',
         'en': 'when received sound label:[LABEL]',
-        'zh-cn': '接收到声音类别[LABEL]时',
-        'ko': 'when received sound label:[LABEL]'
+        'zh-cn': '收到声音标签时 [LABEL]',
+        'ko': '수신된 사운드 레이블:[LABEL]',
+        'de': 'bei Empfang Sound Label[LABEL]',
+        'es': 'cuando se recibe etiqueta de sonido:[LABEL]',
+        'ru': 'при получении звуковой ярлык:[LABEL]',
+        'sr': 'kada je primljena zvučna etiketa:[LABEL]'
     },
     label_block: {
         'ja': 'ラベル',
         'ja-Hira': 'ラベル',
         'en': 'label',
         'zh-cn': '标签',
-        'ko': 'label'
+        'ko': 'label',
+        'de': 'label',
+        'es': 'label',
+        'ru': 'label',
+        'sr': 'label'
     },
     any: {
         'ja': 'のどれか',
         'ja-Hira': 'のどれか',
         'en': 'any',
         'zh-cn': '任何',
-        'ko': 'any'
+        'ko': 'any',
+        'de': 'any',
+        'es': 'any',
+        'ru': 'any',
+        'sr': 'any'
     },
     any_without_of: {
       'ja': 'どれか',
       'ja-Hira': 'どれか',
       'en': 'any',
       'zh-cn': '任何',
-      'ko': 'any'
+      'ko': 'any',
+      'de': 'any',
+      'es': 'any',
+      'ru': 'any',
+      'sr': 'any'
     },
     all: {
         'ja': 'の全て',
         'ja-Hira': 'のすべて',
         'en': 'all',
         'zh-cn': '所有',
-        'ko': 'all'
+        'ko': 'all',
+        'de': 'all',
+        'es': 'all',
+        'ru': 'all',
+        'sr': 'all'
     },
     toggle_classification: {
         'ja': 'ラベル付けを[CLASSIFICATION_STATE]にする',
         'ja-Hira': 'ラベルづけを[CLASSIFICATION_STATE]にする',
         'en': 'turn classification [CLASSIFICATION_STATE]',
-        'zh-cn': '[CLASSIFICATION_STATE]分类',
-        'ko': 'turn classification [CLASSIFICATION_STATE]'
+        'zh-cn': '打开分类 [CLASSIFICATION_STATE]',
+        'ko': '분류 켜기 [CLASSIFICATION_STATE]',
+        'de': 'Klassifizierung einschalten [CLASSIFICATION_STATE]',
+        'es': 'activar clasificación [CLASSIFICATION_STATE]',
+        'ru': 'включить классификацию [CLASSIFICATION_STATE]',
+        'sr': 'uključiti klasifikaciju [CLASSIFICATION_STATE]'
     },
     set_confidence_threshold: {
         'ja': '確度のしきい値を[CONFIDENCE_THRESHOLD]にする',
         'ja-Hira': 'かくどのしきいちを[CONFIDENCE_THRESHOLD]にする',
         'en': 'set confidence threshold [CONFIDENCE_THRESHOLD]',
-        'ko': 'set confidence threshold [CONFIDENCE_THRESHOLD]'
+        'ko': '신뢰 임계값 설정 [CONFIDENCE_THRESHOLD]',
+        'zh-cn': '设定置信度阈值 [CONFIDENCE_THRESHOLD]',
+        'de': 'Vertrauensschwelle einstellen [CONFIDENCE_THRESHOLD]',
+        'es': 'establecer umbral de confianza [CONFIDENCE_THRESHOLD]',
+        'ru': 'установить порог достоверности [CONFIDENCE_THRESHOLD]',
+        'sr': 'postavite prag pouzdanosti [CONFIDENCE_THRESHOLD]'
     },
     get_confidence_threshold: {
         'ja': '確度のしきい値',
         'ja-Hira': 'かくどのしきいち',
         'en': 'confidence threshold',
-        'ko': 'confidence threshold'
+        'ko': '신뢰 한계치',
+        'zh-cn': '置信度阈值',
+        'de': 'Vertrauensschwelle',
+        'es': 'umbral de confianza',
+        'ru': 'порог уверенности',
+        'rs': 'prag povjerenja'
     },
     set_classification_interval: {
         'ja': 'ラベル付けを[CLASSIFICATION_INTERVAL]秒間に1回行う',
         'ja-Hira': 'ラベルづけを[CLASSIFICATION_INTERVAL]びょうかんに1かいおこなう',
         'en': 'Label once every [CLASSIFICATION_INTERVAL] seconds',
         'zh-cn': '每隔[CLASSIFICATION_INTERVAL]秒标记一次',
-        'ko': 'Label once every [CLASSIFICATION_INTERVAL] seconds'
+        'ko': '[CLASSIFICATION_INTERVAL] 초마다 한 번씩 레이블',
+        'de': 'Beschriften Sie einmal alle [CLASSIFICATION_INTERVAL] Sekunden',
+        'ru': 'Ярлык один раз каждые [CLASSIFICATION_INTERVAL] секунды',
+        'sr': 'Označi jednom u [CLASSIFICATION_INTERVAL] sekunde'
     },
     video_toggle: {
         'ja': 'ビデオを[VIDEO_STATE]にする',
         'ja-Hira': 'ビデオを[VIDEO_STATE]にする',
         'en': 'turn video [VIDEO_STATE]',
         'zh-cn': '[VIDEO_STATE]摄像头',
-        'ko': 'turn video [VIDEO_STATE]'
+        'ko': '비디오 켜기 [VIDEO_STATE]',
+        'zh-cn': '打开视频 [VIDEO_STATE]',
+        'de': 'Video einschalten [VIDEO_STATE]',
+        'es': 'encender video [VIDEO_STATE]',
+        'ru': 'включить видео [VIDEO_STATE]',
+        'sr': 'uključiti video [VIDEO_STATE]'
     },
     on: {
         'ja': '入',
         'ja-Hira': 'いり',
         'en': 'on',
         'zh-cn': '开启',
-        'ko': 'on'
+        'ko': '켜기',
+        'de': 'ein',
+        'es': 'encender',
+        'ru': 'включить',
+        'sr': 'uključiti'
     },
     off: {
         'ja': '切',
         'ja-Hira': 'きり',
         'en': 'off',
         'zh-cn': '关闭',
-        'ko': 'off'
+        'ko': '끄기',
+        'de': 'aus',
+        'es': 'apagar',
+        'ru': 'выключить',
+        'sr': 'isključiti'
     },
     video_on_flipped: {
         'ja': '左右反転',
         'ja-Hira': 'さゆうはんてん',
         'en': 'on flipped',
         'zh-cn': '镜像开启',
-        'ko': 'on flipped'
+        'ko': 'on flipped',
+        'de': 'on flipped',
+        'es': 'on flipped',
+        'ru': 'on flipped',
+        'sr': 'on flipped'
     }
 };
 
-const AvailableLocales = ['en', 'ja', 'ja-Hira', 'zh-cn', 'ko'];
+const AvailableLocales = ['en', 'ja', 'ja-Hira', 'zh-cn', 'ko', 'de', 'es', 'ru', 'sr'];
 
 class Scratch3TM2ScratchBlocks {
     constructor (runtime) {
@@ -220,7 +323,7 @@ class Scratch3TM2ScratchBlocks {
 
         return {
             id: 'tm2scratch',
-            name: 'TM2Scratch',
+            name: 'cubroid tm',
             blockIconURI: blockIconURI,
             blocks: [
                 {

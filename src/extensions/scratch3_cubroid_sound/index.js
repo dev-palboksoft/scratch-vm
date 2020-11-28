@@ -458,8 +458,8 @@ class Scratch3CubroidSoundBlocks {
             id: Scratch3CubroidSoundBlocks.EXTENSION_ID,
             name: formatMessage({
                 id: 'cubroidsound.extensionName',
-                default: 'Sound Block',
-                description: 'Sound Block'
+                default: '사운드 블록',
+                description: '사운드 블록'
             }),
             blockIconURI: blockIconURI,
             showStatusButton: true,

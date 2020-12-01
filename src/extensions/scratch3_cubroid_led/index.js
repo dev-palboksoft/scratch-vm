@@ -464,24 +464,33 @@ class Scratch3CubroidLEDBlocks {
 
         const symbol = cast.toString(args.MATRIX).replace(/\s/g, '');
 
-        const a0 = parseInt(symbol.substr(0, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a1 = parseInt(symbol.substr(8, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a2 = parseInt(symbol.substr(16, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a3 = parseInt(symbol.substr(24, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a4 = parseInt(symbol.substr(32, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a5 = parseInt(symbol.substr(40, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a6 = parseInt(symbol.substr(48, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
-        const a7 = parseInt(symbol.substr(56, 8), 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const a0 = (symbol.substr(0, 8).toString()).split('').reverse().join('');
+        const a1 = (symbol.substr(8, 8).toString()).split('').reverse().join('');
+        const a2 = (symbol.substr(16, 8).toString()).split('').reverse().join('');
+        const a3 = (symbol.substr(24, 8).toString()).split('').reverse().join('');
+        const a4 = (symbol.substr(32, 8).toString()).split('').reverse().join('');
+        const a5 = (symbol.substr(40, 8).toString()).split('').reverse().join('');
+        const a6 = (symbol.substr(48, 8).toString()).split('').reverse().join('');
+        const a7 = (symbol.substr(56, 8).toString()).split('').reverse().join('');
 
-        // console.log(a0)
-        // console.log(a1)
-        // console.log(a2)
-        // console.log(a3)
-        // console.log(a4)
-        // console.log(a5)
-        // console.log(a6)
-        // console.log(a7)
-        const hexString = a7 + a6 + a5 + a4 + a3 + a2 + a1 + a0
+        const hs0 = parseInt(a0, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs1 = parseInt(a1, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs2 = parseInt(a2, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs3 = parseInt(a3, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs4 = parseInt(a4, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs5 = parseInt(a5, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs6 = parseInt(a6, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+        const hs7 = parseInt(a7, 2).toString(16).toUpperCase().toString().padStart(2, '0');
+
+        // console.log(hs0)
+        // console.log(hs1)
+        // console.log(hs2)
+        // console.log(hs3)
+        // console.log(hs4)
+        // console.log(hs5)
+        // console.log(hs6)
+        // console.log(hs7)
+        const hexString = hs0 + hs1 + hs2 + hs3 + hs4 + hs5 + hs6 + hs7
         this._peripheral.lceControl(hexString);
 
         return new Promise(resolve => {

@@ -256,7 +256,7 @@ class Scratch3Facemesh2ScratchBlocks {
 
         return {
             id: 'facemesh2scratch',
-            name: 'cubroid Facemesh',
+            name: 'Cubroid Face Tracking',
             blockIconURI: blockIconURI,
             blocks: [
                 {

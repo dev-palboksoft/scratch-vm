@@ -323,7 +323,7 @@ class Scratch3TM2ScratchBlocks {
 
         return {
             id: 'tm2scratch',
-            name: 'cubroid tm',
+            name: 'Teachable Machine Image/Sound',
             blockIconURI: blockIconURI,
             blocks: [
                 {

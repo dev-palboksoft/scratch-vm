@@ -467,7 +467,7 @@ class Scratch3Handpose2ScratchBlocks {
 
         return {
             id: 'handpose2scratch',
-            name: 'cubroid hand pose',
+            name: 'Cubroid finger Tracking',
             blockIconURI: blockIconURI,
             blocks: [
                 {

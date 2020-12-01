@@ -475,7 +475,7 @@ class Scratch3Posenet2ScratchBlocks {
         this._locale = this.setLocale();
         return {
             id: 'posenet2scratch',
-            name: 'cubroid pose',
+            name: 'Cubroid Pose',
             blockIconURI: blockIconURI,
             blocks: [
                 {

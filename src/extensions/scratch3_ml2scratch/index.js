@@ -460,7 +460,7 @@ class Scratch3ML2ScratchBlocks {
 
     return {
       id: 'ml2scratch',
-      name: 'cubroid ml',
+      name: 'Cubroid Machine Learning',
       blockIconURI: blockIconURI,
       blocks: [
         {

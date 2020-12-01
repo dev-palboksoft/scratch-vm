@@ -198,7 +198,7 @@ class Scratch3ImageClassifierBlocks {
 
     return {
       id: 'ic2scratch',
-      name: 'cubroid ic',
+      name: 'Cubroid Image Classifier',
       blockIconURI: blockIconURI,
       blocks: [
         {

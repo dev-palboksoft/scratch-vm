@@ -265,6 +265,17 @@ class Scratch3CubroidLEDBlocks {
                         }
                     }
                 },
+                {
+                    opcode: 'ledAllClearControl',
+                    text: formatMessage({
+                        id: 'cubroidled.ledAllClearBlock',
+                        default: '화면 지우기',
+                        description: '화면 지우기'
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                    }
+                },
             ],
             menus: {
                 MenuAlpabet: this.MENU_ALPABET, 
@@ -472,6 +483,16 @@ class Scratch3CubroidLEDBlocks {
         // console.log(a7)
         const hexString = a7 + a6 + a5 + a4 + a3 + a2 + a1 + a0
         this._peripheral.lceControl(hexString);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 100);
+        });
+    }
+
+    ledAllClearControl (args) {
+        this._peripheral.lceControl('0000000000000000');
 
         return new Promise(resolve => {
             setTimeout(() => {

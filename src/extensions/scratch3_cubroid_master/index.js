@@ -136,7 +136,7 @@ const MotorOptions = {
 }
 
 /**
- * Scratch 3.0 blocks to interact with a cubroid dc motor peripheral.
+ * Scratch 3.0 blocks to interact with a cubroid Master peripheral.
  */
 class Scratch3CubroidMasterBlocks {
 
@@ -144,7 +144,7 @@ class Scratch3CubroidMasterBlocks {
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Cubroid Dc Motor 1';
+        return 'Cubroid Master';
     }
 
     /**
@@ -184,7 +184,7 @@ class Scratch3CubroidMasterBlocks {
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'colorControl',
+                    opcode: 'masterColorControl',
                     text: formatMessage({
                         id: 'cubroidmaster.colorControl',
                         default: '[COLOR] 색 불빛 켜기',
@@ -216,7 +216,7 @@ class Scratch3CubroidMasterBlocks {
         };
     }
 
-    colorControl (args, util) {
+    masterColorControl (args, util) {
         const color = args.COLOR
         // console.log("color", color)
         const rgb = Cast.toRgbColorObject(color);

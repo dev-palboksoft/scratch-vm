@@ -266,6 +266,22 @@ class Scratch3CubroidLEDBlocks {
                     }
                 },
                 {
+                    opcode: 'lceImgControl',
+                    text: formatMessage({
+                        id: 'cubroidled.ledMatrixBlock',
+                        default: '[MATRIX] 보여주기',
+                        description: '[MATRIX] 보여주기'
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        MATRIX: {
+                            type: ArgumentType.MATRIX,
+                            menu: 'MenuImg',
+                            defaultValue: '0066660000427e3c'
+                        }
+                    }
+                },
+                {
                     opcode: 'ledAllClearControl',
                     text: formatMessage({
                         id: 'cubroidled.ledAllClearBlock',
@@ -279,7 +295,8 @@ class Scratch3CubroidLEDBlocks {
             ],
             menus: {
                 MenuAlpabet: this.MENU_ALPABET, 
-                MenuNumber: this.MENU_NUMBER
+                MenuNumber: this.MENU_NUMBER,
+                MenuImg: this.MENU_IMG
             }
         };
     }
@@ -438,6 +455,143 @@ class Scratch3CubroidLEDBlocks {
         ]
     };
 
+    get MENU_IMG () {
+        return [
+            {
+                text: 'Smile1',
+                value: '0066660000427e3c'
+            },
+            {
+                text: 'Smile2',
+                value: '0042e7420081663c'
+            },
+            {
+                text: 'Smile3',
+                value: '3c42a581a599423c'
+            },
+            {
+                text: 'Smile4',
+                value: 'ffffc3a500423c00'
+            },
+            {
+                text: 'Happy',
+                value: '00006600423c0000'
+            },
+            {
+                text: 'Cry',
+                value: '0000e7c3003c4200'
+            },
+            {
+                text: 'Angry',
+                value: '4224006666001824'
+            },
+            {
+                text: 'Sad',
+                value: '3c42a581bd81423c'
+            },
+            {
+                text: 'Sun',
+                value: '00281a7c3e581400'
+            },
+            {
+                text: 'Moon',
+                value: '00381c0c0c1c3800'
+            },
+            {
+                text: 'Square',
+                value: '007e7e7e7e7e7e00'
+            },
+            {
+                text: 'Circle',
+                value: '003c7e7e7e7e3c00'
+            },
+            {
+                text: 'Triangle',
+                value: '0002060e1e3e7e00'
+            },
+            {
+                text: 'Flower',
+                value: '3c3cdbe7e7db3c3c'
+            },
+            {
+                text: 'Heart',
+                value: '0066ffffff7e3c18'
+            },
+            {
+                text: '8angles',
+                value: '00183c7e7e3c1800'
+            },
+            {
+                text: 'Exclamation',
+                value: '00183c3c3c180018'
+            },
+            {
+                text: 'Question',
+                value: '003c666038180018'
+            },
+            {
+                text: 'Star',
+                value: '0018187e7e3c6600'
+            },
+            {
+                text: 'Minus',
+                value: '0000007e7e000000'
+            },
+            {
+                text: 'Plus',
+                value: '0018187e7e181800'
+            },
+            {
+                text: 'Multiply',
+                value: '00666e1c38766600'   
+            },
+            {
+                text: 'Division',
+                value: '0018007e7e001800'
+            },
+            {
+                text: 'Durk',
+                value: '70c88810205f7e3c'
+            },
+            {
+                text: 'Note1',
+                value: '000c0a0808183830'
+            },
+            {
+                text: 'Note2',
+                value: '001e3222266eecc0'
+            },
+            {
+                text: 'O',
+                value: '3c7ee7c3c3e77e3c'
+            },
+            {
+                text: 'X',
+                value: 'c3e77e3c3c7ee7c3'
+            },
+            {
+                text: 'Full',
+                value: 'ffffffffffffffff'
+            },
+            {
+                text: 'Forward',
+                value: '00183c5a18181800' 
+            },
+            {
+                text: 'Backward',
+                value: '001818185a3c1800'
+            },
+            {
+                text: 'Right',
+                value: '0010207e7e201000'
+            },
+            {
+                text: 'Left',
+                value: '0008047e7e040800'
+            }
+        ]
+    };
+
     lceAlpabetControl (args) {
         const matrix = args.MATRIX;
         this._peripheral.lceControl(matrix);
@@ -450,6 +604,17 @@ class Scratch3CubroidLEDBlocks {
     }
 
     lceNumberControl (args) {
+        const matrix = args.MATRIX;
+        this._peripheral.lceControl(matrix);
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve();
+            }, 100);
+        });
+    }
+
+    lceImgControl (args) {
         const matrix = args.MATRIX;
         this._peripheral.lceControl(matrix);
 

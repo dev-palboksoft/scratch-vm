@@ -153,7 +153,7 @@ class Scratch3TMPose2ScratchBlocks {
 
         return {
             id: 'tmpose2scratch',
-            name: 'Teachable Machine Pose',
+            name: 'TMPose2Scratch',
             blockIconURI: blockIconURI,
             blocks: [
                 {

@@ -228,7 +228,7 @@ class Scratch3CubroidDcMotor01Blocks {
                         INDEX: {
                             type: ArgumentType.STRING,
                             menu: 'MotorAction',
-                            defaultValue: 'Stop'
+                            defaultValue: MotorOptions.LEFT
                         }
                     }
                 },
@@ -248,7 +248,7 @@ class Scratch3CubroidDcMotor01Blocks {
                         INDEX: {
                             type: ArgumentType.STRING,
                             menu: 'MotorAction',
-                            defaultValue: 'Stop'
+                            defaultValue: MotorOptions.LEFT
                         }
                     }
                 },
@@ -274,14 +274,6 @@ class Scratch3CubroidDcMotor01Blocks {
         return [
             {
                 text: formatMessage({
-                    id: 'cubroiddcmotor01.motoroptionmenu.stop',
-                    default: 'Stop',
-                    description: 'Stop'
-                }),
-                value: MotorOptions.STOP
-            },
-            {
-                text: formatMessage({
                     id: 'cubroiddcmotor01.motoroptionmenu.left',
                     default: 'Left',
                     description: 'Left'
@@ -295,6 +287,14 @@ class Scratch3CubroidDcMotor01Blocks {
                     description: 'Right'
                 }),
                 value: MotorOptions.RIGHT
+            },
+            {
+                text: formatMessage({
+                    id: 'cubroiddcmotor01.motoroptionmenu.stop',
+                    default: 'Stop',
+                    description: 'Stop'
+                }),
+                value: MotorOptions.STOP
             }
         ]
     }

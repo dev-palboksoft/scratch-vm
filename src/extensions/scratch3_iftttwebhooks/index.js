@@ -50,7 +50,7 @@ class Scratch3IFTTTWebhooks {
                 {
                     opcode: 'setValue1',
                     blockType: BlockType.COMMAND,
-                    text: 'value1を[VALUE1]にする',
+                    text: 'value1 [VALUE1] to',
                     arguments: {
                       VALUE1: {
                           type: ArgumentType.STRING,
@@ -61,7 +61,7 @@ class Scratch3IFTTTWebhooks {
                 {
                     opcode: 'setValue2',
                     blockType: BlockType.COMMAND,
-                    text: 'value2を[VALUE2]にする',
+                    text: 'value2 [VALUE2] to',
                     arguments: {
                       VALUE2: {
                           type: ArgumentType.STRING,
@@ -72,7 +72,7 @@ class Scratch3IFTTTWebhooks {
                 {
                     opcode: 'setValue3',
                     blockType: BlockType.COMMAND,
-                    text: 'value3を[VALUE3]にする',
+                    text: 'value3 [VALUE3] to',
                     arguments: {
                       VALUE3: {
                           type: ArgumentType.STRING,
@@ -83,7 +83,7 @@ class Scratch3IFTTTWebhooks {
                 {
                     opcode: 'getIfttt',
                     blockType: BlockType.COMMAND,
-                    text: '送る'
+                    text: 'send'
                 },
                 {
                     opcode: 'getEvent',

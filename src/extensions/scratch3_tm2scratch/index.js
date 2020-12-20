@@ -178,7 +178,7 @@ const Message = {
         'ja-Hira': 'ラベルづけを[CLASSIFICATION_STATE]にする',
         'en': 'turn classification [CLASSIFICATION_STATE]',
         'zh-cn': '打开分类 [CLASSIFICATION_STATE]',
-        'ko': '분류 켜기 [CLASSIFICATION_STATE]',
+        'ko': '분류 [CLASSIFICATION_STATE]',
         'de': 'Klassifizierung einschalten [CLASSIFICATION_STATE]',
         'es': 'activar clasificación [CLASSIFICATION_STATE]',
         'ru': 'включить классификацию [CLASSIFICATION_STATE]',
@@ -199,7 +199,7 @@ const Message = {
         'ja': '確度のしきい値',
         'ja-Hira': 'かくどのしきいち',
         'en': 'confidence threshold',
-        'ko': '신뢰 한계치',
+        'ko': '신뢰 임계값',
         'zh-cn': '置信度阈值',
         'de': 'Vertrauensschwelle',
         'es': 'umbral de confianza',
@@ -211,7 +211,7 @@ const Message = {
         'ja-Hira': 'ラベルづけを[CLASSIFICATION_INTERVAL]びょうかんに1かいおこなう',
         'en': 'Label once every [CLASSIFICATION_INTERVAL] seconds',
         'zh-cn': '每隔[CLASSIFICATION_INTERVAL]秒标记一次',
-        'ko': '[CLASSIFICATION_INTERVAL] 초마다 한 번씩 레이블',
+        'ko': '[CLASSIFICATION_INTERVAL] 초마다 한 번씩 분류',
         'de': 'Beschriften Sie einmal alle [CLASSIFICATION_INTERVAL] Sekunden',
         'ru': 'Ярлык один раз каждые [CLASSIFICATION_INTERVAL] секунды',
         'sr': 'Označi jednom u [CLASSIFICATION_INTERVAL] sekunde'
@@ -220,9 +220,8 @@ const Message = {
         'ja': 'ビデオを[VIDEO_STATE]にする',
         'ja-Hira': 'ビデオを[VIDEO_STATE]にする',
         'en': 'turn video [VIDEO_STATE]',
-        'zh-cn': '[VIDEO_STATE]摄像头',
-        'ko': '비디오 켜기 [VIDEO_STATE]',
         'zh-cn': '打开视频 [VIDEO_STATE]',
+        'ko': '비디오 [VIDEO_STATE]',
         'de': 'Video einschalten [VIDEO_STATE]',
         'es': 'encender video [VIDEO_STATE]',
         'ru': 'включить видео [VIDEO_STATE]',
@@ -255,11 +254,11 @@ const Message = {
         'ja-Hira': 'さゆうはんてん',
         'en': 'on flipped',
         'zh-cn': '镜像开启',
-        'ko': 'on flipped',
-        'de': 'on flipped',
-        'es': 'on flipped',
-        'ru': 'on flipped',
-        'sr': 'on flipped'
+        'ko': '뒤집힌 상태로 켜기',
+        'de': 'auf gespiegelt',
+        'es': 'invertir',
+        'ru': 'включить в обратную',
+        'sr': 'измени укљученост'
     }
 };
 
@@ -370,7 +369,7 @@ class Scratch3TM2ScratchBlocks {
                     arguments: {
                         URL: {
                             type: ArgumentType.STRING,
-                            defaultValue: 'https://teachablemachine.withgoogle.com/models/0rX_3hoH/'
+                            defaultValue: '' // https://teachablemachine.withgoogle.com/models/0rX_3hoH/
                         }
                     }
                 },
@@ -429,7 +428,7 @@ class Scratch3TM2ScratchBlocks {
                     arguments: {
                         URL: {
                             type: ArgumentType.STRING,
-                            defaultValue: 'https://teachablemachine.withgoogle.com/models/xP0spGSB/'
+                            defaultValue: '' //https://teachablemachine.withgoogle.com/models/xP0spGSB/
                         }
                     }
                 },

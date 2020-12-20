@@ -184,7 +184,7 @@ class Scratch3CubroidMasterBlocks {
             showStatusButton: true,
             blocks: [
                 {
-                    opcode: 'masterColorControl',
+                    opcode: 'cubroidMasterColorControl',
                     text: formatMessage({
                         id: 'cubroidmaster.colorControl',
                         default: '[COLOR] 색 불빛 켜기',
@@ -200,7 +200,7 @@ class Scratch3CubroidMasterBlocks {
                     filter: [TargetType.SPRITE]
                 },
                 {
-                    opcode: 'colorOffControl',
+                    opcode: 'cubroidColorOffControl',
                     text: formatMessage({
                         id: 'cubroidmaster.colorOff',
                         default: '불빛 끄기',
@@ -216,7 +216,7 @@ class Scratch3CubroidMasterBlocks {
         };
     }
 
-    masterColorControl (args, util) {
+    cubroidMasterColorControl (args, util) {
         const color = args.COLOR
         // console.log("color", color)
         const rgb = Cast.toRgbColorObject(color);
@@ -233,7 +233,7 @@ class Scratch3CubroidMasterBlocks {
         });
     }
 
-    colorOffControl () {
+    cubroidColorOffControl () {
         const rgb = {r: 0, g: 0, b: 0};
         this._peripheral.colorControl(rgb);
     }

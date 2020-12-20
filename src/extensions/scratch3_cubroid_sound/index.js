@@ -475,7 +475,7 @@ class Scratch3CubroidSoundBlocks {
                     arguments: {
                         SOUND: {
                             type: ArgumentType.STRING,
-                            menu: 'soundAction',
+                            menu: 'cubroidSoundAction',
                             defaultValue: SoundOptions.A_DO.name
                         }
                     }
@@ -491,7 +491,7 @@ class Scratch3CubroidSoundBlocks {
                     arguments: {
                         SOUND: {
                             type: ArgumentType.STRING,
-                            menu: 'soundAction',
+                            menu: 'cubroidSoundAction',
                             defaultValue: SoundOptions.A_DO.name
                         },
                         BEATS: {
@@ -511,7 +511,7 @@ class Scratch3CubroidSoundBlocks {
                     arguments: {
                         ERROR_SOUND: {
                             type: ArgumentType.STRING,
-                            menu: 'errorSoundAction',
+                            menu: 'cubroidErrorSoundAction',
                             defaultValue: ErrorSoundOptions.SOUND01.name
                         }
                     }
@@ -527,7 +527,7 @@ class Scratch3CubroidSoundBlocks {
                     arguments: {
                         ERROR_SOUND: {
                             type: ArgumentType.STRING,
-                            menu: 'errorSoundAction',
+                            menu: 'cubroidErrorSoundAction',
                             defaultValue: ErrorSoundOptions.SOUND01.name
                         },
                         BEATS: {
@@ -538,11 +538,11 @@ class Scratch3CubroidSoundBlocks {
                 },
             ],
             menus: {
-                soundAction: {
+                cubroidSoundAction: {
                     acceptReporters: true,
                     items: this.SOUND_ACTION_MENU
                 },
-                errorSoundAction: {
+                cubroidErrorSoundAction: {
                     acceptReporters: true,
                     items: this.ERROR_SOUND_ACTION_MENU
                 }
@@ -553,48 +553,48 @@ class Scratch3CubroidSoundBlocks {
     get ERROR_SOUND_ACTION_MENU () {
         return [
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound01',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound01',
                     default: '에러',
                     description: '에러'
                 }),
                 value: ErrorSoundOptions.SOUND01.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound02',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound02',
                     default: '작은 효과',
                     description: '작은 효과'
                 }),
                 value: ErrorSoundOptions.SOUND02.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound03',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound03',
                     default: '경고',
                     description: '경고'
                 }),
                 value: ErrorSoundOptions.SOUND03.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound04',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound04',
                     default: '경쾌한',
                     description: '경쾌한'
                 }),
                 value: ErrorSoundOptions.SOUND04.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound05',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound05',
                     default: '기본',
                     description: '기본'
                 }),
                 value: ErrorSoundOptions.SOUND05.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.errorSound06',
+                text: formatMessage({
+                    id: 'cubroidsound.errorSound06',
                     default: '큰 효과',
                     description: '큰 효과'
                 }),
@@ -606,200 +606,200 @@ class Scratch3CubroidSoundBlocks {
     get SOUND_ACTION_MENU () {
         return [
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.ado',
+                text: formatMessage({
+                    id: 'cubroidsound.ado',
                     default: '도 C(48)',
                     description: '도 C(48)'
                 }),
                 value: SoundOptions.A_DO.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.ados',
+                text: formatMessage({
+                    id: 'cubroidsound.ados',
                     default: '도# C#(49)',
                     description: '도# C#(49)'
                 }),
                 value: SoundOptions.A_DO_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.are',
+                text: formatMessage({
+                    id: 'cubroidsound.are',
                     default: '레 D(50)',
                     description: '레 D(50)'
                 }),
                 value: SoundOptions.A_RE.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.amib',
+                text: formatMessage({
+                    id: 'cubroidsound.amib',
                     default: '미b Eb(51)',
                     description: '미b Eb(51)'
                 }),
                 value: SoundOptions.A_MI_B.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.ami',
+                text: formatMessage({
+                    id: 'cubroidsound.ami',
                     default: '미 E(52)',
                     description: '미 E(52)'
                 }),
                 value: SoundOptions.A_MI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.afa',
+                text: formatMessage({
+                    id: 'cubroidsound.afa',
                     default: '파 F(53)',
                     description: '파 F(53)'
                 }),
                 value: SoundOptions.A_FA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.afas',
+                text: formatMessage({
+                    id: 'cubroidsound.afas',
                     default: '파# F#(54)',
                     description: '파# F#(54)'
                 }),
                 value: SoundOptions.A_FA_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.asol',
+                text: formatMessage({
+                    id: 'cubroidsound.asol',
                     default: '솔 G(55)',
                     description: '솔 G(55)'
                 }),
                 value: SoundOptions.A_SOL.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.asols',
+                text: formatMessage({
+                    id: 'cubroidsound.asols',
                     default: '솔# G#(56)',
                     description: '솔# G#(56)'
                 }),
                 value: SoundOptions.A_SOL_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.ala',
+                text: formatMessage({
+                    id: 'cubroidsound.ala',
                     default: '라 A(57)',
                     description: '라 A(57)'
                 }),
                 value: SoundOptions.A_LA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.asib',
+                text: formatMessage({
+                    id: 'cubroidsound.asib',
                     default: '시b Bb(58',
                     description: '시b Bb(58'
                 }),
                 value: SoundOptions.A_SI_B.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.asi',
+                text: formatMessage({
+                    id: 'cubroidsound.asi',
                     default: '시 B(59)',
                     description: '시 B(59)'
                 }),
                 value: SoundOptions.A_SI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bdo',
+                text: formatMessage({
+                    id: 'cubroidsound.bdo',
                     default: '도 C(60)',
                     description: '도 C(60)'
                 }),
                 value: SoundOptions.B_DO.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bdos',
+                text: formatMessage({
+                    id: 'cubroidsound.bdos',
                     default: '도# C#(61)',
                     description: '도# C#(61)'
                 }),
                 value: SoundOptions.B_DO_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bre',
+                text: formatMessage({
+                    id: 'cubroidsound.bre',
                     default: '레 D(62)',
                     description: '레 D(62)'
                 }),
                 value: SoundOptions.B_RE.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bmib',
+                text: formatMessage({
+                    id: 'cubroidsound.bmib',
                     default: '미b Eb(63)',
                     description: '미b Eb(63)'
                 }),
                 value: SoundOptions.B_MI_B.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bmi',
+                text: formatMessage({
+                    id: 'cubroidsound.bmi',
                     default: '미 E(64)',
                     description: '미 E(64)'
                 }),
                 value: SoundOptions.B_MI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bfa',
+                text: formatMessage({
+                    id: 'cubroidsound.bfa',
                     default: '파 F(65)',
                     description: '파 F(65)'
                 }),
                 value: SoundOptions.B_FA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bfas',
+                text: formatMessage({
+                    id: 'cubroidsound.bfas',
                     default: '파# F#(66)',
                     description: '파# F#(66)'
                 }),
                 value: SoundOptions.B_FA_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bsol',
+                text: formatMessage({
+                    id: 'cubroidsound.bsol',
                     default: '솔 G(67)',
                     description: '솔 G(67)'
                 }),
                 value: SoundOptions.B_SOL.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bsols',
+                text: formatMessage({
+                    id: 'cubroidsound.bsols',
                     default: '솔# G#(68)',
                     description: '솔# G#(68)'
                 }),
                 value: SoundOptions.B_SOL_S.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bla',
+                text: formatMessage({
+                    id: 'cubroidsound.bla',
                     default: '라 A(69)',
                     description: '라 A(69)'
                 }),
                 value: SoundOptions.B_LA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bsib',
+                text: formatMessage({
+                    id: 'cubroidsound.bsib',
                     default: '시b Bb(70)',
                     description: '시b Bb(70)'
                 }),
                 value: SoundOptions.B_SI_B.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.bsi',
+                text: formatMessage({
+                    id: 'cubroidsound.bsi',
                     default: '시 B(71)',
                     description: '시 B(71)'
                 }),
                 value: SoundOptions.B_SI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.cdo',
+                text: formatMessage({
+                    id: 'cubroidsound.cdo',
                     default: '도 C(72)',
                     description: '도 C(72)'
                 }),
@@ -807,7 +807,7 @@ class Scratch3CubroidSoundBlocks {
             },
             {
                 text:  formatMessage({
-                    id: 'cubroidSound.cre',
+                    id: 'cubroidsound.cre',
                     default: '레 D(74)',
                     description: '레 D(74)'
                 }),
@@ -815,47 +815,47 @@ class Scratch3CubroidSoundBlocks {
             },
             {
                 text:  formatMessage({
-                    id: 'cubroidSound.cmi',
+                    id: 'cubroidsound.cmi',
                     default: '미 E(76)',
                     description: '미 E(76)'
                 }),
                 value: SoundOptions.C_MI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.cfa',
+                text: formatMessage({
+                    id: 'cubroidsound.cfa',
                     default: '파 F(77)',
                     description: '파 F(77)'
                 }),
                 value: SoundOptions.C_FA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.csol',
+                text: formatMessage({
+                    id: 'cubroidsound.csol',
                     default: '솔 G(79)',
                     description: '솔 G(79)'
                 }),
                 value: SoundOptions.C_SOL.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.cla',
+                text: formatMessage({
+                    id: 'cubroidsound.cla',
                     default: '라 A(81)',
                     description: '라 A(81)'
                 }),
                 value: SoundOptions.C_LA.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.csi',
+                text: formatMessage({
+                    id: 'cubroidsound.csi',
                     default: '시 B(83)',
                     description: '시 B(83)'
                 }),
                 value: SoundOptions.C_SI.name
             },
             {
-                text:  formatMessage({
-                    id: 'cubroidSound.ddo',
+                text: formatMessage({
+                    id: 'cubroidsound.ddo',
                     default: '도 C(84)',
                     description: '도 C(84)'
                 }),

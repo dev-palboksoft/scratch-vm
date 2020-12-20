@@ -254,7 +254,7 @@ const Message = {
     'ja': 'ビデオを[VIDEO_STATE]にする',
     'ja-Hira': 'ビデオを[VIDEO_STATE]にする',
     'en': 'turn video [VIDEO_STATE]',
-    'ko': '비디오 켜기 [VIDEO_STATE]',
+    'ko': '비디오 [VIDEO_STATE]',
     'zh-cn': '打开视频 [VIDEO_STATE]',
     'de': 'Video einschalten [VIDEO_STATE]',
     'es': 'encender video [VIDEO_STATE]',
@@ -287,12 +287,12 @@ const Message = {
     'ja': '左右反転',
     'ja-Hira': 'さゆうはんてん',
     'en': 'on flipped',
-    'ko': 'on flipped',
+    'ko': '뒤집힌 상태로 켜기',
     'zh-cn': 'on flipped',
-    'de': 'on flipped',
-    'es': 'on flipped',
-    'ru': 'on flipped',
-    'sr': 'on flipped'
+    'de': 'auf gespiegelt',
+    'es': 'invertir',
+    'ru': 'включить в обратную',
+    'sr': 'измени укљученост'
   },
 }
 const AvailableLocales = ['en', 'ja', 'ja-Hira', 'ko', 'zh-cn', 'de', 'es', 'ru', 'sr'];

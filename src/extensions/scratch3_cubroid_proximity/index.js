@@ -72,12 +72,23 @@ class CubroidProximity {
             this._ble.disconnect();
         }
 
-        const bleName = localStorage.getItem('groupNumber') ? BLEUUID.name + '-' + localStorage.getItem('groupNumber') : BLEUUID.name;
+        let bleName = '';
+        let arrFilters = [];
+        if (localStorage.getItem('groupNumber')) {
+            // 그룹넘버링이 있을 경우
+            bleName = BLEUUID.name + '-' + localStorage.getItem('groupNumber');
+            arrFilters = [
+                { namePrefix: bleName }
+            ];
+        } else {
+            bleName = BLEUUID.name;
+            arrFilters = [
+                { name: bleName }
+            ];
+        }
 
         this._ble = new BLE(this._runtime, this._extensionId, {
-            filters: [
-                { name: bleName }
-            ],
+            filters: arrFilters,
             optionalServices: [
                 BLEUUID.service_strings
             ]
